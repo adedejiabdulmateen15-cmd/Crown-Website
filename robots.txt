@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://adedejiabdulmateen15-cmd.github.io/Crown-Website/sitemap.xml
