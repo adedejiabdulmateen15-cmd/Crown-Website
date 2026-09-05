@@ -1,541 +1,444 @@
-/* =========================================================
-   CROWNLABS
-   PROFESSIONAL WEBSITE JAVASCRIPT
-   ========================================================= */
+// ==========================================
+// CROWNLABS — CROWN MUSIC PLAYER
+// ==========================================
 
+document.addEventListener("DOMContentLoaded", () => {
+    const audio = new Audio();
 
-/* =========================
-   PAGE LOADER
-   ========================= */
-
-window.addEventListener("load", () => {
-
-    const loader = document.getElementById("loader");
-
-    setTimeout(() => {
-
-        if (loader) {
-            loader.classList.add("loaded");
-        }
-
-    }, 900);
-
-});
-
-
-/* =========================
-   SCROLL REVEAL
-   ========================= */
-
-const revealElements =
-    document.querySelectorAll(".reveal");
-
-
-const revealObserver =
-    new IntersectionObserver(
-        (entries) => {
-
-            entries.forEach((entry) => {
-
-                if (entry.isIntersecting) {
-
-                    entry.target.classList.add("visible");
-
-                    revealObserver.unobserve(
-                        entry.target
-                    );
-
-                }
-
-            });
-
+    const tracks = [
+        {
+            title: "STARS",
+            artist: "Crown Music",
+            file: "music/stars.mp3",
+            cover: "music/stars-cover.png"
         },
         {
-            threshold: 0.12
+            title: "CROWNVERSE",
+            artist: "Crown Music",
+            file: "music/crownverse.mp3",
+            cover: "music/crownverse-cover.png"
+        },
+        {
+            title: "CHILL",
+            artist: "Crown Music",
+            file: "music/chill.mp3",
+            cover: "music/chill-cover.png"
         }
-    );
+    ];
 
+    let currentTrack = 0;
+    let isPlaying = false;
+    let isShuffle = false;
+    let isRepeat = false;
 
-revealElements.forEach((element) => {
+    // ------------------------------------------
+    // Find music elements on the page
+    // ------------------------------------------
 
-    revealObserver.observe(element);
+    const musicSection = document.querySelector("#music");
 
-});
-
-
-/* =========================
-   SCROLL PROGRESS
-   ========================= */
-
-const progressBar =
-    document.querySelector(".scroll-progress");
-
-
-function updateScrollProgress() {
-
-    if (!progressBar) return;
-
-
-    const scrollTop =
-        window.scrollY;
-
-
-    const documentHeight =
-        document.documentElement.scrollHeight
-        - window.innerHeight;
-
-
-    if (documentHeight <= 0) {
-
-        progressBar.style.width = "0%";
-
+    if (!musicSection) {
+        console.log("Crown Music section not found yet.");
         return;
     }
 
+    const player = musicSection.querySelector(".music-player");
 
-    const progress =
-        (scrollTop / documentHeight) * 100;
-
-
-    progressBar.style.width =
-        `${progress}%`;
-
-}
-
-
-window.addEventListener(
-    "scroll",
-    updateScrollProgress,
-    {
-        passive: true
+    if (!player) {
+        console.log("Crown Music player not found yet.");
+        return;
     }
-);
 
+    const playButton = player.querySelector(".play-btn");
+    const previousButton = player.querySelector(".previous-btn");
+    const nextButton = player.querySelector(".next-btn");
+    const shuffleButton = player.querySelector(".shuffle-btn");
+    const repeatButton = player.querySelector(".repeat-btn");
+    const downloadButton = player.querySelector(".download-btn");
 
-updateScrollProgress();
+    const progressBar = player.querySelector(".progress-bar");
+    const volumeBar = player.querySelector(".volume-bar");
 
+    const playerCover = player.querySelector(".player-cover");
+    const playerTitle = player.querySelector(".player-title");
+    const playerArtist = player.querySelector(".player-artist");
+    const currentTimeElement = player.querySelector(".current-time");
+    const durationElement = player.querySelector(".duration");
 
-/* =========================
-   CURSOR GLOW
-   ========================= */
+    // ------------------------------------------
+    // Utility
+    // ------------------------------------------
 
-const cursorGlow =
-    document.querySelector(".cursor-glow");
-
-
-if (cursorGlow) {
-
-    window.addEventListener(
-        "mousemove",
-        (event) => {
-
-            cursorGlow.style.left =
-                `${event.clientX}px`;
-
-            cursorGlow.style.top =
-                `${event.clientY}px`;
-
-        },
-        {
-            passive: true
-        }
-    );
-
-}
-
-
-/* =========================
-   MOBILE MENU
-   ========================= */
-
-const mobileMenu =
-    document.querySelector(".mobile-menu");
-
-
-const navigation =
-    document.querySelector(".navigation");
-
-
-if (mobileMenu && navigation) {
-
-    mobileMenu.addEventListener(
-        "click",
-        () => {
-
-            navigation.classList.toggle(
-                "mobile-open"
-            );
-
-        }
-    );
-
-
-    navigation
-        .querySelectorAll("a")
-        .forEach((link) => {
-
-            link.addEventListener(
-                "click",
-                () => {
-
-                    navigation.classList.remove(
-                        "mobile-open"
-                    );
-
-                }
-            );
-
-        });
-
-}
-
-
-/* =========================
-   ACTIVE NAVIGATION
-   ========================= */
-
-const sections =
-    document.querySelectorAll(
-        "section[id]"
-    );
-
-
-const navLinks =
-    document.querySelectorAll(
-        ".navigation a"
-    );
-
-
-function updateActiveNavigation() {
-
-    let currentSection = "";
-
-
-    sections.forEach((section) => {
-
-        const sectionTop =
-            section.offsetTop - 150;
-
-
-        const sectionBottom =
-            sectionTop +
-            section.offsetHeight;
-
-
-        if (
-            window.scrollY >= sectionTop &&
-            window.scrollY < sectionBottom
-        ) {
-
-            currentSection =
-                section.id;
-
+    function formatTime(seconds) {
+        if (!Number.isFinite(seconds)) {
+            return "0:00";
         }
 
-    });
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
 
-
-    navLinks.forEach((link) => {
-
-        link.classList.remove(
-            "active"
-        );
-
-
-        const target =
-            link.getAttribute("href");
-
-
-        if (
-            target ===
-            `#${currentSection}`
-        ) {
-
-            link.classList.add(
-                "active"
-            );
-
-        }
-
-    });
-
-}
-
-
-window.addEventListener(
-    "scroll",
-    updateActiveNavigation,
-    {
-        passive: true
+        return `${minutes}:${String(remainingSeconds).padStart(2, "0")}`;
     }
-);
 
+    // ------------------------------------------
+    // Load track
+    // ------------------------------------------
 
-updateActiveNavigation();
+    function loadTrack(index) {
+        currentTrack = index;
 
+        const track = tracks[currentTrack];
 
-/* =========================
-   3D PROJECT CARD
-   ========================= */
+        audio.src = track.file;
+        audio.load();
 
-const projectCard =
-    document.querySelector(
-        ".featured-project"
-    );
-
-
-if (
-    projectCard &&
-    window.matchMedia(
-        "(pointer:fine)"
-    ).matches
-) {
-
-    projectCard.addEventListener(
-        "mousemove",
-        (event) => {
-
-            const rect =
-                projectCard.getBoundingClientRect();
-
-
-            const x =
-                event.clientX -
-                rect.left;
-
-
-            const y =
-                event.clientY -
-                rect.top;
-
-
-            const rotateY =
-                ((x / rect.width) - .5) * 3;
-
-
-            const rotateX =
-                ((y / rect.height) - .5) * -3;
-
-
-            projectCard.style.transform =
-                `perspective(1200px)
-                 rotateX(${rotateX}deg)
-                 rotateY(${rotateY}deg)
-                 translateY(-5px)`;
-
+        if (playerCover) {
+            playerCover.src = track.cover;
+            playerCover.alt = `${track.title} cover`;
         }
-    );
 
-
-    projectCard.addEventListener(
-        "mouseleave",
-        () => {
-
-            projectCard.style.transform =
-                "";
-
+        if (playerTitle) {
+            playerTitle.textContent = track.title;
         }
-    );
 
-}
+        if (playerArtist) {
+            playerArtist.textContent = track.artist;
+        }
 
+        if (progressBar) {
+            progressBar.value = 0;
+        }
 
-/* =========================
-   CROWNVERSE PARALLAX
-   ========================= */
+        if (currentTimeElement) {
+            currentTimeElement.textContent = "0:00";
+        }
 
-const crownverseBackground =
-    document.querySelector(
-        ".crownverse-bg"
-    );
+        if (durationElement) {
+            durationElement.textContent = "0:00";
+        }
 
-
-window.addEventListener(
-    "scroll",
-    () => {
-
-        if (!crownverseBackground)
-            return;
-
-
-        const rect =
-            crownverseBackground
-                .getBoundingClientRect();
-
-
-        const offset =
-            (window.innerHeight / 2 -
-            rect.top) * 0.04;
-
-
-        crownverseBackground.style.transform =
-            `translateY(${offset}px)`;
-
-    },
-    {
-        passive: true
+        updateTrackCards();
+        updatePlayButton();
     }
-);
 
+    // ------------------------------------------
+    // Play / Pause
+    // ------------------------------------------
 
-/* =========================
-   AI STATUS TEXT
-   ========================= */
-
-const aiSection =
-    document.querySelector(
-        "#ai"
-    );
-
-
-const aiBadge =
-    document.querySelector(
-        ".ai-badge"
-    );
-
-
-if (aiSection && aiBadge) {
-
-    const statuses = [
-        "CURRENTLY IN DEVELOPMENT",
-        "CROWN A.I IS BEING BUILT",
-        "INTELLIGENCE SYSTEM ONLINE",
-        "COMING SOON"
-    ];
-
-
-    let statusIndex = 0;
-
-
-    setInterval(() => {
-
-        statusIndex =
-            (statusIndex + 1)
-            % statuses.length;
-
-
-        aiBadge.style.opacity = "0";
-
-
-        setTimeout(() => {
-
-            aiBadge.lastChild.textContent =
-                ` ${statuses[statusIndex]}`;
-
-            aiBadge.style.opacity = "1";
-
-        }, 250);
-
-    }, 5000);
-
-}
-
-
-/* =========================
-   SMOOTH BUTTON FEEDBACK
-   ========================= */
-
-document
-    .querySelectorAll(
-        ".button, .nav-button, .download-button"
-    )
-    .forEach((button) => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                button.classList.add(
-                    "button-clicked"
-                );
-
-
-                setTimeout(() => {
-
-                    button.classList.remove(
-                        "button-clicked"
-                    );
-
-                }, 300);
-
+    async function togglePlay() {
+        try {
+            if (audio.paused) {
+                await audio.play();
+                isPlaying = true;
+            } else {
+                audio.pause();
+                isPlaying = false;
             }
-        );
 
-    });
-
-
-/* =========================
-   HERO PARALLAX
-   ========================= */
-
-const heroVisual =
-    document.querySelector(
-        ".hero-visual"
-    );
-
-
-if (
-    heroVisual &&
-    window.matchMedia(
-        "(pointer:fine)"
-    ).matches
-) {
-
-    window.addEventListener(
-        "mousemove",
-        (event) => {
-
-            const x =
-                (event.clientX /
-                window.innerWidth -
-                .5) * 10;
-
-
-            const y =
-                (event.clientY /
-                window.innerHeight -
-                .5) * 10;
-
-
-            heroVisual.style.transform =
-                `translate(${x}px, ${y}px)`;
-
-        },
-        {
-            passive: true
+            updatePlayButton();
+        } catch (error) {
+            console.error("Crown Music playback error:", error);
         }
-    );
+    }
 
-}
+    function updatePlayButton() {
+        if (!playButton) return;
 
+        playButton.textContent = audio.paused ? "▶" : "Ⅱ";
+        playButton.setAttribute(
+            "aria-label",
+            audio.paused ? "Play music" : "Pause music"
+        );
+    }
 
-/* =========================
-   YEAR
-   ========================= */
+    // ------------------------------------------
+    // Previous
+    // ------------------------------------------
 
-document
-    .querySelectorAll(
-        "[data-year]"
-    )
-    .forEach((element) => {
+    function previousTrack() {
+        if (audio.currentTime > 3) {
+            audio.currentTime = 0;
+            return;
+        }
 
-        element.textContent =
-            new Date()
-                .getFullYear();
+        currentTrack--;
 
+        if (currentTrack < 0) {
+            currentTrack = tracks.length - 1;
+        }
+
+        loadTrack(currentTrack);
+
+        if (isPlaying) {
+            audio.play().catch(() => {});
+        }
+    }
+
+    // ------------------------------------------
+    // Next
+    // ------------------------------------------
+
+    function nextTrack() {
+        if (isShuffle) {
+            let nextIndex;
+
+            do {
+                nextIndex = Math.floor(Math.random() * tracks.length);
+            } while (tracks.length > 1 && nextIndex === currentTrack);
+
+            currentTrack = nextIndex;
+        } else {
+            currentTrack++;
+
+            if (currentTrack >= tracks.length) {
+                currentTrack = 0;
+            }
+        }
+
+        loadTrack(currentTrack);
+
+        if (isPlaying) {
+            audio.play().catch(() => {});
+        }
+    }
+
+    // ------------------------------------------
+    // Track cards
+    // ------------------------------------------
+
+    function updateTrackCards() {
+        const cards = musicSection.querySelectorAll("[data-track]");
+
+        cards.forEach(card => {
+            const cardTrack = Number(card.dataset.track);
+
+            card.classList.toggle(
+                "active",
+                cardTrack === currentTrack
+            );
+        });
+    }
+
+    // ------------------------------------------
+    // Progress
+    // ------------------------------------------
+
+    audio.addEventListener("loadedmetadata", () => {
+        if (durationElement) {
+            durationElement.textContent = formatTime(audio.duration);
+        }
+
+        if (progressBar) {
+            progressBar.max = audio.duration || 0;
+        }
     });
 
+    audio.addEventListener("timeupdate", () => {
+        if (progressBar) {
+            progressBar.value = audio.currentTime;
+        }
 
-/* =========================
-   CONSOLE BRANDING
-   ========================= */
+        if (currentTimeElement) {
+            currentTimeElement.textContent =
+                formatTime(audio.currentTime);
+        }
+    });
 
-console.log(
-    "%c👑 CROWNLABS",
-    "font-size:24px;font-weight:900;color:#d4af37;"
-);
+    if (progressBar) {
+        progressBar.addEventListener("input", () => {
+            audio.currentTime = Number(progressBar.value);
+        });
+    }
 
-console.log(
-    "%cTechnology Beyond Limits.",
-    "font-size:14px;color:#999;"
-);
+    // ------------------------------------------
+    // When song ends
+    // ------------------------------------------
+
+    audio.addEventListener("ended", () => {
+        if (isRepeat) {
+            audio.currentTime = 0;
+            audio.play().catch(() => {});
+            return;
+        }
+
+        nextTrack();
+    });
+
+    // ------------------------------------------
+    // Volume
+    // ------------------------------------------
+
+    if (volumeBar) {
+        audio.volume = Number(volumeBar.value);
+
+        volumeBar.addEventListener("input", () => {
+            audio.volume = Number(volumeBar.value);
+        });
+    } else {
+        audio.volume = 0.8;
+    }
+
+    // ------------------------------------------
+    // Shuffle
+    // ------------------------------------------
+
+    if (shuffleButton) {
+        shuffleButton.addEventListener("click", () => {
+            isShuffle = !isShuffle;
+
+            shuffleButton.classList.toggle("active", isShuffle);
+            shuffleButton.setAttribute(
+                "aria-pressed",
+                String(isShuffle)
+            );
+        });
+    }
+
+    // ------------------------------------------
+    // Repeat
+    // ------------------------------------------
+
+    if (repeatButton) {
+        repeatButton.addEventListener("click", () => {
+            isRepeat = !isRepeat;
+
+            repeatButton.classList.toggle("active", isRepeat);
+            repeatButton.setAttribute(
+                "aria-pressed",
+                String(isRepeat)
+            );
+        });
+    }
+
+    // ------------------------------------------
+    // Download
+    // ------------------------------------------
+
+    if (downloadButton) {
+        downloadButton.addEventListener("click", () => {
+            const track = tracks[currentTrack];
+
+            const link = document.createElement("a");
+
+            link.href = track.file;
+            link.download = `${track.title.toLowerCase()}.mp3`;
+
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+        });
+    }
+
+    // ------------------------------------------
+    // Buttons
+    // ------------------------------------------
+
+    if (playButton) {
+        playButton.addEventListener("click", togglePlay);
+    }
+
+    if (previousButton) {
+        previousButton.addEventListener("click", previousTrack);
+    }
+
+    if (nextButton) {
+        nextButton.addEventListener("click", nextTrack);
+    }
+
+    // ------------------------------------------
+    // Clicking a music card
+    // ------------------------------------------
+
+    const trackCards = musicSection.querySelectorAll("[data-track]");
+
+    trackCards.forEach(card => {
+        card.addEventListener("click", () => {
+            const index = Number(card.dataset.track);
+
+            if (!Number.isInteger(index)) {
+                return;
+            }
+
+            loadTrack(index);
+
+            isPlaying = true;
+
+            audio.play()
+                .then(() => {
+                    updatePlayButton();
+                })
+                .catch(error => {
+                    console.error(
+                        "Unable to play Crown Music track:",
+                        error
+                    );
+                    isPlaying = false;
+                    updatePlayButton();
+                });
+        });
+    });
+
+    // ------------------------------------------
+    // Keyboard controls
+    // ------------------------------------------
+
+    document.addEventListener("keydown", event => {
+        const tag = event.target.tagName;
+
+        if (
+            tag === "INPUT" ||
+            tag === "TEXTAREA" ||
+            tag === "BUTTON"
+        ) {
+            return;
+        }
+
+        if (event.code === "Space") {
+            event.preventDefault();
+            togglePlay();
+        }
+
+        if (event.code === "ArrowRight") {
+            audio.currentTime = Math.min(
+                audio.currentTime + 5,
+                audio.duration || audio.currentTime
+            );
+        }
+
+        if (event.code === "ArrowLeft") {
+            audio.currentTime = Math.max(
+                audio.currentTime - 5,
+                0
+            );
+        }
+    });
+
+    // ------------------------------------------
+    // Audio state
+    // ------------------------------------------
+
+    audio.addEventListener("play", () => {
+        isPlaying = true;
+        updatePlayButton();
+    });
+
+    audio.addEventListener("pause", () => {
+        isPlaying = false;
+        updatePlayButton();
+    });
+
+    audio.addEventListener("error", () => {
+        console.error(
+            "Crown Music could not load:",
+            tracks[currentTrack].file
+        );
+    });
+
+    // ------------------------------------------
+    // Start with STARS
+    // ------------------------------------------
+
+    loadTrack(0);
+
+    console.log("👑 Crown Music initialized.");
+});
