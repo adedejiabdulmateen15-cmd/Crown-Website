@@ -2031,3 +2031,275 @@ footer {
         display: none;
     }
 }
+
+/* =========================================================
+   CROWN A.I RELEASE UPDATE
+   ========================================================= */
+
+.ai-status-information {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+}
+
+
+.ai-status-information > div {
+
+    position: relative;
+
+    padding: 16px;
+
+    border:
+
+        1px solid
+
+        rgba(255,255,255,.06);
+
+    border-radius: 10px;
+
+    background:
+
+        rgba(255,255,255,.015);
+
+}
+
+
+.ai-status-information > div::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 18px;
+
+    width: 28px;
+
+    height: 1px;
+
+    background:
+
+        var(--gold);
+
+}
+
+
+.ai-features {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 14px;
+
+    margin-top: 25px;
+
+}
+
+
+.ai-feature {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 18px;
+
+    border:
+
+        1px solid
+
+        rgba(255,255,255,.07);
+
+    border-radius: 12px;
+
+    background:
+
+        rgba(255,255,255,.015);
+
+    transition:
+
+        transform .3s ease,
+
+        border-color .3s ease,
+
+        background .3s ease;
+
+}
+
+
+.ai-feature:hover {
+
+    transform:
+
+        translateY(-4px);
+
+    border-color:
+
+        var(--gold-border);
+
+    background:
+
+        rgba(212,175,55,.035);
+
+}
+
+
+.ai-feature > span {
+
+    color:
+
+        var(--gold);
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+}
+
+
+.ai-feature div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+}
+
+
+.ai-feature strong {
+
+    color:
+
+        var(--white);
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+}
+
+
+.ai-feature small {
+
+    color:
+
+        #666;
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+.ai-actions {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 14px;
+
+    margin-top: 30px;
+
+}
+
+
+.ai-release-info {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 28px;
+
+    color:
+
+        #666;
+
+    font-size: 8px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+}
+
+
+.ai-release-info .status-dot {
+
+    width: 7px;
+
+    height: 7px;
+
+    flex-shrink: 0;
+
+}
+
+
+@media (max-width: 900px) {
+
+    .ai-status-information {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .ai-features {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .ai-status-information {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .ai-actions {
+
+        flex-direction:
+            column;
+
+    }
+
+
+    .ai-actions .button {
+
+        width: 100%;
+
+        justify-content:
+            center;
+
+    }
+
+}
