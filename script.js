@@ -4,18 +4,23 @@
    ========================================================= */
 
 
-/* =========================
+/* =========================================================
    PAGE LOADER
-   ========================= */
+   ========================================================= */
 
 window.addEventListener("load", () => {
 
-    const loader = document.getElementById("loader");
+    const loader =
+        document.getElementById("loader");
 
     setTimeout(() => {
 
         if (loader) {
-            loader.classList.add("loaded");
+
+            loader.classList.add(
+                "loaded"
+            );
+
         }
 
     }, 900);
@@ -23,23 +28,30 @@ window.addEventListener("load", () => {
 });
 
 
-/* =========================
+/* =========================================================
    SCROLL REVEAL
-   ========================= */
+   ========================================================= */
 
 const revealElements =
-    document.querySelectorAll(".reveal");
+    document.querySelectorAll(
+        ".reveal"
+    );
 
 
 const revealObserver =
     new IntersectionObserver(
+
         (entries) => {
 
             entries.forEach((entry) => {
 
-                if (entry.isIntersecting) {
+                if (
+                    entry.isIntersecting
+                ) {
 
-                    entry.target.classList.add("visible");
+                    entry.target.classList.add(
+                        "visible"
+                    );
 
                     revealObserver.unobserve(
                         entry.target
@@ -50,47 +62,67 @@ const revealObserver =
             });
 
         },
+
         {
             threshold: 0.12
         }
+
     );
 
 
-revealElements.forEach((element) => {
+revealElements.forEach(
+    (element) => {
 
-    revealObserver.observe(element);
+        revealObserver.observe(
+            element
+        );
 
-});
+    }
+);
 
 
-/* =========================
+/* =========================================================
    SCROLL PROGRESS
-   ========================= */
+   ========================================================= */
 
 const progressBar =
-    document.querySelector(".scroll-progress");
+    document.querySelector(
+        ".scroll-progress"
+    );
 
 
 function updateScrollProgress() {
 
-    if (!progressBar) return;
+    if (!progressBar) {
+
+        return;
+
+    }
+
 
     const scrollTop =
         window.scrollY;
 
+
     const documentHeight =
-        document.documentElement.scrollHeight
-        - window.innerHeight;
+        document.documentElement.scrollHeight -
+        window.innerHeight;
+
 
     if (documentHeight <= 0) {
 
-        progressBar.style.width = "0%";
+        progressBar.style.width =
+            "0%";
 
         return;
+
     }
 
+
     const progress =
-        (scrollTop / documentHeight) * 100;
+        (scrollTop / documentHeight) *
+        100;
+
 
     progressBar.style.width =
         `${progress}%`;
@@ -99,29 +131,37 @@ function updateScrollProgress() {
 
 
 window.addEventListener(
+
     "scroll",
+
     updateScrollProgress,
+
     {
         passive: true
     }
+
 );
 
 
 updateScrollProgress();
 
 
-/* =========================
+/* =========================================================
    CURSOR GLOW
-   ========================= */
+   ========================================================= */
 
 const cursorGlow =
-    document.querySelector(".cursor-glow");
+    document.querySelector(
+        ".cursor-glow"
+    );
 
 
 if (cursorGlow) {
 
     window.addEventListener(
+
         "mousemove",
+
         (event) => {
 
             cursorGlow.style.left =
@@ -131,30 +171,41 @@ if (cursorGlow) {
                 `${event.clientY}px`;
 
         },
+
         {
             passive: true
         }
+
     );
 
 }
 
 
-/* =========================
+/* =========================================================
    MOBILE MENU
-   ========================= */
+   ========================================================= */
 
 const mobileMenu =
-    document.querySelector(".mobile-menu");
+    document.querySelector(
+        ".mobile-menu"
+    );
 
 
 const navigation =
-    document.querySelector(".navigation");
+    document.querySelector(
+        ".navigation"
+    );
 
 
-if (mobileMenu && navigation) {
+if (
+    mobileMenu &&
+    navigation
+) {
 
     mobileMenu.addEventListener(
+
         "click",
+
         () => {
 
             const opened =
@@ -162,12 +213,17 @@ if (mobileMenu && navigation) {
                     "mobile-open"
                 );
 
+
             mobileMenu.setAttribute(
+
                 "aria-expanded",
+
                 String(opened)
+
             );
 
         }
+
     );
 
 
@@ -176,19 +232,26 @@ if (mobileMenu && navigation) {
         .forEach((link) => {
 
             link.addEventListener(
+
                 "click",
+
                 () => {
 
                     navigation.classList.remove(
                         "mobile-open"
                     );
 
+
                     mobileMenu.setAttribute(
+
                         "aria-expanded",
+
                         "false"
+
                     );
 
                 }
+
             );
 
         });
@@ -196,9 +259,9 @@ if (mobileMenu && navigation) {
 }
 
 
-/* =========================
+/* =========================================================
    ACTIVE NAVIGATION
-   ========================= */
+   ========================================================= */
 
 const sections =
     document.querySelectorAll(
@@ -214,70 +277,94 @@ const navLinks =
 
 function updateActiveNavigation() {
 
-    let currentSection = "";
+    let currentSection =
+        "";
 
-    sections.forEach((section) => {
 
-        const sectionTop =
-            section.offsetTop - 150;
+    sections.forEach(
+        (section) => {
 
-        const sectionBottom =
-            sectionTop +
-            section.offsetHeight;
+            const sectionTop =
+                section.offsetTop -
+                150;
 
-        if (
-            window.scrollY >= sectionTop &&
-            window.scrollY < sectionBottom
-        ) {
 
-            currentSection =
-                section.id;
+            const sectionBottom =
+                sectionTop +
+                section.offsetHeight;
+
+
+            if (
+
+                window.scrollY >=
+                sectionTop &&
+
+                window.scrollY <
+                sectionBottom
+
+            ) {
+
+                currentSection =
+                    section.id;
+
+            }
 
         }
+    );
 
-    });
 
+    navLinks.forEach(
+        (link) => {
 
-    navLinks.forEach((link) => {
-
-        link.classList.remove(
-            "active"
-        );
-
-        const target =
-            link.getAttribute("href");
-
-        if (
-            target ===
-            `#${currentSection}`
-        ) {
-
-            link.classList.add(
+            link.classList.remove(
                 "active"
             );
 
-        }
 
-    });
+            const target =
+                link.getAttribute(
+                    "href"
+                );
+
+
+            if (
+
+                target ===
+                `#${currentSection}`
+
+            ) {
+
+                link.classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+    );
 
 }
 
 
 window.addEventListener(
+
     "scroll",
+
     updateActiveNavigation,
+
     {
         passive: true
     }
+
 );
 
 
 updateActiveNavigation();
 
 
-/* =========================
+/* =========================================================
    3D PROJECT CARD
-   ========================= */
+   ========================================================= */
 
 const projectCard =
     document.querySelector(
@@ -286,59 +373,84 @@ const projectCard =
 
 
 if (
+
     projectCard &&
+
     window.matchMedia(
         "(pointer:fine)"
     ).matches
+
 ) {
 
     projectCard.addEventListener(
+
         "mousemove",
+
         (event) => {
 
             const rect =
-                projectCard.getBoundingClientRect();
+                projectCard
+                    .getBoundingClientRect();
+
 
             const x =
                 event.clientX -
                 rect.left;
 
+
             const y =
                 event.clientY -
                 rect.top;
 
+
             const rotateY =
-                ((x / rect.width) - .5) * 3;
+                (
+                    (x / rect.width) -
+                    0.5
+                ) *
+                3;
+
 
             const rotateX =
-                ((y / rect.height) - .5) * -3;
+                (
+                    (y / rect.height) -
+                    0.5
+                ) *
+                -3;
+
 
             projectCard.style.transform =
-                `perspective(1200px)
-                 rotateX(${rotateX}deg)
-                 rotateY(${rotateY}deg)
-                 translateY(-5px)`;
+                `
+                perspective(1200px)
+                rotateX(${rotateX}deg)
+                rotateY(${rotateY}deg)
+                translateY(-5px)
+                `;
 
         }
+
     );
 
 
     projectCard.addEventListener(
+
         "mouseleave",
+
         () => {
 
             projectCard.style.transform =
                 "";
 
         }
+
     );
 
 }
 
 
-/* =========================
+/* =========================================================
    CROWNVERSE PARALLAX
-   ========================= */
+   ========================================================= */
 
 const crownverseBackground =
     document.querySelector(
@@ -346,34 +458,46 @@ const crownverseBackground =
     );
 
 
-window.addEventListener(
-    "scroll",
-    () => {
+if (crownverseBackground) {
 
-        if (!crownverseBackground)
-            return;
+    window.addEventListener(
 
-        const rect =
-            crownverseBackground
-                .getBoundingClientRect();
+        "scroll",
 
-        const offset =
-            (window.innerHeight / 2 -
-            rect.top) * 0.04;
+        () => {
 
-        crownverseBackground.style.transform =
-            `translateY(${offset}px)`;
-
-    },
-    {
-        passive: true
-    }
-);
+            const rect =
+                crownverseBackground
+                    .getBoundingClientRect();
 
 
-/* =========================
+            const offset =
+                (
+                    window.innerHeight /
+                    2 -
+
+                    rect.top
+                ) *
+                0.04;
+
+
+            crownverseBackground.style.transform =
+                `translateY(${offset}px)`;
+
+        },
+
+        {
+            passive: true
+        }
+
+    );
+
+}
+
+
+/* =========================================================
    AI STATUS TEXT
-   ========================= */
+   ========================================================= */
 
 const aiSection =
     document.querySelector(
@@ -387,49 +511,61 @@ const aiBadge =
     );
 
 
-if (aiSection && aiBadge) {
+const aiBadgeText =
+    document.querySelector(
+        ".ai-badge-text"
+    );
+
+
+if (
+    aiSection &&
+    aiBadge
+) {
 
     const statuses = [
-        "CURRENTLY IN DEVELOPMENT",
-        "CROWN A.I IS BEING BUILT",
-        "INTELLIGENCE SYSTEM ONLINE",
-        "COMING SOON"
+
+        "CROWN A.I ONLINE",
+
+        "GEMINI CLOUD ENGINE",
+
+        "LM STUDIO LOCAL ENGINE",
+
+        "DUAL AI SYSTEM READY"
+
     ];
 
 
-    let statusIndex = 0;
+    let statusIndex =
+        0;
 
 
     setInterval(() => {
 
         statusIndex =
-            (statusIndex + 1)
-            % statuses.length;
+            (
+                statusIndex +
+                1
+            ) %
+            statuses.length;
 
-        aiBadge.style.opacity = "0";
+
+        aiBadge.style.opacity =
+            "0";
+
 
         setTimeout(() => {
 
-            const children =
-                Array.from(
-                    aiBadge.childNodes
-                );
+            if (aiBadgeText) {
 
-            const textNode =
-                children.find(
-                    node =>
-                        node.nodeType ===
-                        Node.TEXT_NODE
-                );
-
-            if (textNode) {
-
-                textNode.textContent =
-                    ` ${statuses[statusIndex]}`;
+                aiBadgeText.textContent =
+                    statuses[
+                        statusIndex
+                    ];
 
             }
 
-            aiBadge.style.opacity = "1";
+            aiBadge.style.opacity =
+                "1";
 
         }, 250);
 
@@ -438,23 +574,33 @@ if (aiSection && aiBadge) {
 }
 
 
-/* =========================
+/* =========================================================
    SMOOTH BUTTON FEEDBACK
-   ========================= */
+   ========================================================= */
 
 document
     .querySelectorAll(
-        ".button, .nav-button, .download-button"
+
+        ".button, " +
+        ".nav-button, " +
+        ".download-button, " +
+        ".ai-download-button, " +
+        ".ai-repository-button"
+
     )
+
     .forEach((button) => {
 
         button.addEventListener(
+
             "click",
+
             () => {
 
                 button.classList.add(
                     "button-clicked"
                 );
+
 
                 setTimeout(() => {
 
@@ -465,14 +611,15 @@ document
                 }, 300);
 
             }
+
         );
 
     });
 
 
-/* =========================
+/* =========================================================
    HERO PARALLAX
-   ========================= */
+   ========================================================= */
 
 const heroVisual =
     document.querySelector(
@@ -481,36 +628,66 @@ const heroVisual =
 
 
 if (
+
     heroVisual &&
+
     window.matchMedia(
         "(pointer:fine)"
     ).matches
+
 ) {
 
     window.addEventListener(
+
         "mousemove",
+
         (event) => {
 
             const x =
-                (event.clientX /
-                window.innerWidth -
-                .5) * 10;
+                (
+                    event.clientX /
+                    window.innerWidth -
+                    0.5
+                ) *
+                10;
+
 
             const y =
-                (event.clientY /
-                window.innerHeight -
-                .5) * 10;
+                (
+                    event.clientY /
+                    window.innerHeight -
+                    0.5
+                ) *
+                10;
+
 
             heroVisual.style.transform =
                 `translate(${x}px, ${y}px)`;
 
         },
+
         {
             passive: true
         }
+
     );
 
 }
+
+
+/* =========================================================
+   CROWN A.I LINKS
+   ========================================================= */
+
+const CROWN_AI = {
+
+    repository:
+        "https://github.com/adedejiabdulmateen15-cmd/Crown-AI",
+
+    release:
+        "https://github.com/adedejiabdulmateen15-cmd/Crown-AI/releases/tag/v5.3.2"
+
+};
 
 
 /* =========================================================
@@ -520,24 +697,53 @@ if (
 const tracks = [
 
     {
-        title: "STARS",
-        artist: "Crown Music",
-        file: "music/stars.mp3",
-        cover: "music/stars-cover.png"
+
+        title:
+            "STARS",
+
+        artist:
+            "Crown Music",
+
+        file:
+            "music/stars.mp3",
+
+        cover:
+            "music/stars-cover.png"
+
     },
 
-    {
-        title: "CROWNVERSE",
-        artist: "Crown Music",
-        file: "music/crownverse.mp3",
-        cover: "music/crownverse-cover.png"
-    },
 
     {
-        title: "CHILL",
-        artist: "Crown Music",
-        file: "music/chill.mp3",
-        cover: "music/chill-cover.png"
+
+        title:
+            "CROWNVERSE",
+
+        artist:
+            "Crown Music",
+
+        file:
+            "music/crownverse.mp3",
+
+        cover:
+            "music/crownverse-cover.png"
+
+    },
+
+
+    {
+
+        title:
+            "CHILL",
+
+        artist:
+            "Crown Music",
+
+        file:
+            "music/chill.mp3",
+
+        cover:
+            "music/chill-cover.png"
+
     }
 
 ];
@@ -551,70 +757,84 @@ const musicPlayer =
 
 if (musicPlayer) {
 
+
     const playerCover =
         document.querySelector(
             ".player-cover"
         );
+
 
     const playerTitle =
         document.querySelector(
             ".player-title"
         );
 
+
     const playerArtist =
         document.querySelector(
             ".player-artist"
         );
+
 
     const playButton =
         document.querySelector(
             ".play-btn"
         );
 
+
     const previousButton =
         document.querySelector(
             ".previous-btn"
         );
+
 
     const nextButton =
         document.querySelector(
             ".next-btn"
         );
 
+
     const shuffleButton =
         document.querySelector(
             ".shuffle-btn"
         );
+
 
     const repeatButton =
         document.querySelector(
             ".repeat-btn"
         );
 
+
     const downloadButton =
         document.querySelector(
             ".download-btn"
         );
+
 
     const progressInput =
         document.querySelector(
             ".progress-bar"
         );
 
+
     const volumeInput =
         document.querySelector(
             ".volume-bar"
         );
+
 
     const currentTimeElement =
         document.querySelector(
             ".current-time"
         );
 
+
     const durationElement =
         document.querySelector(
             ".duration"
         );
+
 
     const musicCards =
         document.querySelectorAll(
@@ -622,127 +842,200 @@ if (musicPlayer) {
         );
 
 
-    let currentTrack = 0;
+    let currentTrack =
+        0;
 
-    let isShuffle = false;
 
-    let isRepeat = false;
+    let isShuffle =
+        false;
+
+
+    let isRepeat =
+        false;
 
 
     const audio =
         new Audio();
 
-    audio.preload = "metadata";
 
-    audio.volume = 0.8;
+    audio.preload =
+        "metadata";
+
+
+    audio.volume =
+        0.8;
 
 
     function formatTime(seconds) {
 
-        if (!Number.isFinite(seconds)) {
+        if (
+            !Number.isFinite(
+                seconds
+            )
+        ) {
+
             return "0:00";
+
         }
 
+
         const minutes =
-            Math.floor(seconds / 60);
+            Math.floor(
+                seconds / 60
+            );
+
 
         const remainingSeconds =
-            Math.floor(seconds % 60)
+            Math.floor(
+                seconds % 60
+            )
                 .toString()
-                .padStart(2, "0");
+                .padStart(
+                    2,
+                    "0"
+                );
+
 
         return `${minutes}:${remainingSeconds}`;
 
     }
 
 
-    function loadTrack(index, autoplay = false) {
+    function loadTrack(
+        index,
+        autoplay = false
+    ) {
 
-        if (index < 0) {
-            index = tracks.length - 1;
+        if (
+            index < 0
+        ) {
+
+            index =
+                tracks.length -
+                1;
+
         }
 
-        if (index >= tracks.length) {
-            index = 0;
+
+        if (
+            index >=
+            tracks.length
+        ) {
+
+            index =
+                0;
+
         }
 
-        currentTrack = index;
+
+        currentTrack =
+            index;
+
 
         const track =
-            tracks[currentTrack];
+            tracks[
+                currentTrack
+            ];
 
 
         audio.src =
             track.file;
 
+
         audio.load();
 
 
-        playerCover.src =
-            track.cover;
+        if (playerCover) {
 
-        playerCover.alt =
-            `${track.title} cover`;
-
-
-        playerTitle.textContent =
-            track.title;
-
-        playerArtist.textContent =
-            track.artist;
+            playerCover.src =
+                track.cover;
 
 
-        currentTimeElement.textContent =
-            "0:00";
+            playerCover.alt =
+                `${track.title} cover`;
 
-        durationElement.textContent =
-            "0:00";
-
-        progressInput.value =
-            "0";
+        }
 
 
-        musicCards.forEach((card) => {
+        if (playerTitle) {
 
-            card.classList.toggle(
-                "active",
-                Number(
-                    card.dataset.track
-                ) === currentTrack
-            );
+            playerTitle.textContent =
+                track.title;
+
+        }
 
 
-            const button =
-                card.querySelector(
-                    ".card-play"
+        if (playerArtist) {
+
+            playerArtist.textContent =
+                track.artist;
+
+        }
+
+
+        if (currentTimeElement) {
+
+            currentTimeElement.textContent =
+                "0:00";
+
+        }
+
+
+        if (durationElement) {
+
+            durationElement.textContent =
+                "0:00";
+
+        }
+
+
+        if (progressInput) {
+
+            progressInput.value =
+                "0";
+
+        }
+
+
+        musicCards.forEach(
+            (card) => {
+
+                const trackNumber =
+                    Number(
+                        card.dataset.track
+                    );
+
+
+                card.classList.toggle(
+
+                    "active",
+
+                    trackNumber ===
+                    currentTrack
+
                 );
 
-            if (button) {
 
-                button.textContent =
-                    "▶";
+                const button =
+                    card.querySelector(
+                        ".card-play"
+                    );
+
+
+                if (button) {
+
+                    button.textContent =
+                        "▶";
+
+                }
 
             }
-
-        });
+        );
 
 
         if (autoplay) {
 
-            audio.play()
-                .then(() => {
-
-                    updatePlayButton();
-
-                })
-                .catch((error) => {
-
-                    console.warn(
-                        "Crown Music playback was blocked:",
-                        error
-                    );
-
-                });
+            playCurrentTrack();
 
         }
 
@@ -754,61 +1047,88 @@ if (musicPlayer) {
 
     function updatePlayButton() {
 
-        if (!playButton) return;
+        if (playButton) {
 
-        if (audio.paused) {
+            if (audio.paused) {
 
-            playButton.textContent =
-                "▶";
+                playButton.textContent =
+                    "▶";
 
-            playButton.setAttribute(
-                "aria-label",
-                "Play"
-            );
 
-        } else {
+                playButton.setAttribute(
 
-            playButton.textContent =
-                "Ⅱ";
+                    "aria-label",
 
-            playButton.setAttribute(
-                "aria-label",
-                "Pause"
-            );
+                    "Play"
+
+                );
+
+            }
+
+            else {
+
+                playButton.textContent =
+                    "Ⅱ";
+
+
+                playButton.setAttribute(
+
+                    "aria-label",
+
+                    "Pause"
+
+                );
+
+            }
 
         }
 
 
-        musicCards.forEach((card) => {
+        musicCards.forEach(
+            (card) => {
 
-            const button =
-                card.querySelector(
-                    ".card-play"
-                );
+                const button =
+                    card.querySelector(
+                        ".card-play"
+                    );
 
-            if (!button) return;
 
-            const trackNumber =
-                Number(
-                    card.dataset.track
-                );
+                if (!button) {
 
-            if (
-                trackNumber === currentTrack &&
-                !audio.paused
-            ) {
+                    return;
 
-                button.textContent =
-                    "Ⅱ";
+                }
 
-            } else {
 
-                button.textContent =
-                    "▶";
+                const trackNumber =
+                    Number(
+                        card.dataset.track
+                    );
+
+
+                if (
+
+                    trackNumber ===
+                    currentTrack &&
+
+                    !audio.paused
+
+                ) {
+
+                    button.textContent =
+                        "Ⅱ";
+
+                }
+
+                else {
+
+                    button.textContent =
+                        "▶";
+
+                }
 
             }
-
-        });
+        );
 
     }
 
@@ -816,16 +1136,21 @@ if (musicPlayer) {
     function playCurrentTrack() {
 
         audio.play()
+
             .then(() => {
 
                 updatePlayButton();
 
             })
+
             .catch((error) => {
 
                 console.warn(
+
                     "Unable to play Crown Music:",
+
                     error
+
                 );
 
             });
@@ -844,11 +1169,15 @@ if (musicPlayer) {
 
     function togglePlay() {
 
-        if (audio.paused) {
+        if (
+            audio.paused
+        ) {
 
             playCurrentTrack();
 
-        } else {
+        }
+
+        else {
 
             pauseCurrentTrack();
 
@@ -863,31 +1192,50 @@ if (musicPlayer) {
 
             let nextIndex;
 
+
             do {
 
                 nextIndex =
                     Math.floor(
+
                         Math.random() *
+
                         tracks.length
+
                     );
 
-            } while (
+            }
+
+            while (
+
                 tracks.length > 1 &&
-                nextIndex === currentTrack
+
+                nextIndex ===
+                currentTrack
+
             );
+
 
             loadTrack(
+
                 nextIndex,
+
                 true
+
             );
 
+
             return;
+
         }
 
 
         loadTrack(
+
             currentTrack + 1,
+
             true
+
         );
 
     }
@@ -895,17 +1243,24 @@ if (musicPlayer) {
 
     function previousTrack() {
 
-        if (audio.currentTime > 3) {
+        if (
+            audio.currentTime > 3
+        ) {
 
-            audio.currentTime = 0;
+            audio.currentTime =
+                0;
 
             return;
+
         }
 
 
         loadTrack(
+
             currentTrack - 1,
+
             true
+
         );
 
     }
@@ -914,8 +1269,11 @@ if (musicPlayer) {
     if (playButton) {
 
         playButton.addEventListener(
+
             "click",
+
             togglePlay
+
         );
 
     }
@@ -924,8 +1282,11 @@ if (musicPlayer) {
     if (nextButton) {
 
         nextButton.addEventListener(
+
             "click",
+
             nextTrack
+
         );
 
     }
@@ -934,8 +1295,11 @@ if (musicPlayer) {
     if (previousButton) {
 
         previousButton.addEventListener(
+
             "click",
+
             previousTrack
+
         );
 
     }
@@ -944,18 +1308,25 @@ if (musicPlayer) {
     if (shuffleButton) {
 
         shuffleButton.addEventListener(
+
             "click",
+
             () => {
 
                 isShuffle =
                     !isShuffle;
 
+
                 shuffleButton.classList.toggle(
+
                     "active",
+
                     isShuffle
+
                 );
 
             }
+
         );
 
     }
@@ -964,18 +1335,25 @@ if (musicPlayer) {
     if (repeatButton) {
 
         repeatButton.addEventListener(
+
             "click",
+
             () => {
 
                 isRepeat =
                     !isRepeat;
 
+
                 repeatButton.classList.toggle(
+
                     "active",
+
                     isRepeat
+
                 );
 
             }
+
         );
 
     }
@@ -984,28 +1362,43 @@ if (musicPlayer) {
     if (downloadButton) {
 
         downloadButton.addEventListener(
+
             "click",
+
             () => {
 
                 const track =
-                    tracks[currentTrack];
+                    tracks[
+                        currentTrack
+                    ];
+
 
                 const link =
-                    document.createElement("a");
+                    document.createElement(
+                        "a"
+                    );
+
 
                 link.href =
                     track.file;
 
+
                 link.download =
                     `${track.title}.mp3`;
 
-                document.body.appendChild(link);
+
+                document.body.appendChild(
+                    link
+                );
+
 
                 link.click();
+
 
                 link.remove();
 
             }
+
         );
 
     }
@@ -1014,22 +1407,35 @@ if (musicPlayer) {
     if (progressInput) {
 
         progressInput.addEventListener(
+
             "input",
+
             () => {
 
-                if (!audio.duration)
+                if (
+                    !audio.duration
+                ) {
+
                     return;
+
+                }
+
 
                 const percentage =
                     Number(
                         progressInput.value
                     );
 
+
                 audio.currentTime =
-                    (percentage / 100) *
+                    (
+                        percentage /
+                        100
+                    ) *
                     audio.duration;
 
             }
+
         );
 
     }
@@ -1038,7 +1444,9 @@ if (musicPlayer) {
     if (volumeInput) {
 
         volumeInput.addEventListener(
+
             "input",
+
             () => {
 
                 audio.volume =
@@ -1047,139 +1455,206 @@ if (musicPlayer) {
                     );
 
             }
+
         );
 
     }
 
 
     audio.addEventListener(
+
         "loadedmetadata",
+
         () => {
 
-            durationElement.textContent =
-                formatTime(
-                    audio.duration
-                );
+            if (durationElement) {
+
+                durationElement.textContent =
+                    formatTime(
+                        audio.duration
+                    );
+
+            }
 
         }
+
     );
 
 
     audio.addEventListener(
+
         "timeupdate",
+
         () => {
 
-            if (!audio.duration)
+            if (
+                !audio.duration
+            ) {
+
                 return;
 
+            }
+
+
             const percentage =
-                (audio.currentTime /
-                audio.duration) *
+                (
+                    audio.currentTime /
+                    audio.duration
+                ) *
                 100;
 
-            progressInput.value =
-                percentage;
 
-            currentTimeElement.textContent =
-                formatTime(
-                    audio.currentTime
-                );
+            if (progressInput) {
+
+                progressInput.value =
+                    percentage;
+
+            }
+
+
+            if (currentTimeElement) {
+
+                currentTimeElement.textContent =
+                    formatTime(
+                        audio.currentTime
+                    );
+
+            }
 
         }
+
     );
 
 
     audio.addEventListener(
+
         "play",
+
         updatePlayButton
+
     );
 
 
     audio.addEventListener(
+
         "pause",
+
         updatePlayButton
+
     );
 
 
     audio.addEventListener(
+
         "ended",
+
         () => {
 
             if (isRepeat) {
 
-                audio.currentTime = 0;
+                audio.currentTime =
+                    0;
+
 
                 playCurrentTrack();
 
-            } else {
+            }
+
+            else {
 
                 nextTrack();
 
             }
 
         }
+
     );
 
 
-    musicCards.forEach((card) => {
+    musicCards.forEach(
+        (card) => {
 
-        card.addEventListener(
-            "click",
-            (event) => {
+            card.addEventListener(
 
-                const clickedButton =
-                    event.target.closest(
-                        ".card-play"
+                "click",
+
+                (event) => {
+
+                    const clickedButton =
+                        event.target.closest(
+                            ".card-play"
+                        );
+
+
+                    const index =
+                        Number(
+                            card.dataset.track
+                        );
+
+
+                    if (
+
+                        index ===
+                        currentTrack &&
+
+                        clickedButton &&
+
+                        !audio.paused
+
+                    ) {
+
+                        pauseCurrentTrack();
+
+                        return;
+
+                    }
+
+
+                    loadTrack(
+
+                        index,
+
+                        true
+
                     );
-
-                const index =
-                    Number(
-                        card.dataset.track
-                    );
-
-
-                if (
-                    index === currentTrack &&
-                    clickedButton &&
-                    !audio.paused
-                ) {
-
-                    pauseCurrentTrack();
-
-                    return;
 
                 }
 
+            );
 
-                loadTrack(
-                    index,
-                    true
-                );
-
-            }
-        );
-
-    });
+        }
+    );
 
 
     document.addEventListener(
+
         "keydown",
+
         (event) => {
 
             const tag =
-                document.activeElement?.tagName;
+                document.activeElement
+                    ?.tagName;
+
 
             if (
+
                 tag === "INPUT" ||
+
                 tag === "TEXTAREA"
+
             ) {
+
                 return;
+
             }
 
 
             if (
+
                 event.code ===
                 "Space"
+
             ) {
 
                 event.preventDefault();
@@ -1190,16 +1665,24 @@ if (musicPlayer) {
 
 
             if (
+
                 event.code ===
                 "ArrowRight"
+
             ) {
 
-                if (audio.duration) {
+                if (
+                    audio.duration
+                ) {
 
                     audio.currentTime =
                         Math.min(
+
                             audio.duration,
-                            audio.currentTime + 5
+
+                            audio.currentTime +
+                            5
+
                         );
 
                 }
@@ -1208,59 +1691,99 @@ if (musicPlayer) {
 
 
             if (
+
                 event.code ===
                 "ArrowLeft"
+
             ) {
 
                 audio.currentTime =
                     Math.max(
+
                         0,
-                        audio.currentTime - 5
+
+                        audio.currentTime -
+                        5
+
                     );
 
             }
 
         }
+
     );
 
 
-    loadTrack(0, false);
+    loadTrack(
+        0,
+        false
+    );
 
 }
 
 
-/* =========================
-   YEAR
-   ========================= */
+/* =========================================================
+   AUTOMATIC YEAR
+   ========================================================= */
 
 document
     .querySelectorAll(
         "[data-year]"
     )
-    .forEach((element) => {
 
-        element.textContent =
-            new Date()
-                .getFullYear();
+    .forEach(
+        (element) => {
 
-    });
+            element.textContent =
+                new Date()
+                    .getFullYear();
+
+        }
+    );
 
 
-/* =========================
+/* =========================================================
    CONSOLE BRANDING
-   ========================= */
+   ========================================================= */
 
 console.log(
+
     "%c👑 CROWNLABS",
-    "font-size:24px;font-weight:900;color:#d4af37;"
+
+    "font-size:24px;" +
+    "font-weight:900;" +
+    "color:#d4af37;"
+
 );
 
+
 console.log(
+
     "%cTechnology Beyond Limits.",
-    "font-size:14px;color:#999;"
+
+    "font-size:14px;" +
+    "color:#999;"
+
 );
 
+
 console.log(
+
+    "%c🤖 CROWN A.I CONNECTED",
+
+    "font-size:14px;" +
+    "font-weight:900;" +
+    "color:#d4af37;"
+
+);
+
+
+console.log(
+
     "%c🎵 CROWN MUSIC ENGINE ONLINE",
-    "font-size:14px;font-weight:900;color:#d4af37;"
+
+    "font-size:14px;" +
+    "font-weight:900;" +
+    "color:#d4af37;"
+
 );
