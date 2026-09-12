@@ -9,61 +9,54 @@
    ========================================================= */
 
 /* =========================================================
-   FAST PAGE LOADER
+   CROWNLABS — FAST FAIL-SAFE LOADER
    ========================================================= */
 
 (() => {
-
-    const loader =
-        document.getElementById("loader");
+    const loader = document.getElementById("loader");
 
     if (!loader) {
         return;
     }
 
-    const hideLoader = () => {
+    let loaderClosed = false;
 
-        requestAnimationFrame(() => {
+    const closeLoader = () => {
+        if (loaderClosed) {
+            return;
+        }
 
-            setTimeout(() => {
+        loaderClosed = true;
 
-                loader.classList.add(
-                    "loaded"
-                );
+        loader.classList.add("loaded");
 
-            }, 350);
-
-        });
-
+        document.body.classList.add("crown-ready");
     };
 
     /*
-       Do not wait for every image/audio resource.
-       The website can appear immediately while
-       the remaining assets continue loading.
-    */
-
-    if (
-        document.readyState ===
-        "loading"
-    ) {
-
+     * Start immediately.
+     * Do NOT wait for images, music, fonts, or other
+     * resources to finish loading.
+     */
+    if (document.readyState === "loading") {
         document.addEventListener(
             "DOMContentLoaded",
-            hideLoader,
-            {
-                once: true
-            }
+            () => {
+                setTimeout(closeLoader, 300);
+            },
+            { once: true }
         );
-
     } else {
-
-        hideLoader();
-
+        setTimeout(closeLoader, 300);
     }
 
+    /*
+     * Absolute safety fallback.
+     * Even if another script/resource causes a problem,
+     * the loader can never stay on screen forever.
+     */
+    setTimeout(closeLoader, 2500);
 })();
-
 
 /* =========================================================
    SCROLL REVEAL
