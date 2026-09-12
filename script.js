@@ -8,24 +8,61 @@
    PAGE LOADER
    ========================================================= */
 
-window.addEventListener("load", () => {
+/* =========================================================
+   FAST PAGE LOADER
+   ========================================================= */
+
+(() => {
 
     const loader =
         document.getElementById("loader");
 
-    setTimeout(() => {
+    if (!loader) {
+        return;
+    }
 
-        if (loader) {
+    const hideLoader = () => {
 
-            loader.classList.add(
-                "loaded"
-            );
+        requestAnimationFrame(() => {
 
-        }
+            setTimeout(() => {
 
-    }, 900);
+                loader.classList.add(
+                    "loaded"
+                );
 
-});
+            }, 350);
+
+        });
+
+    };
+
+    /*
+       Do not wait for every image/audio resource.
+       The website can appear immediately while
+       the remaining assets continue loading.
+    */
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            hideLoader,
+            {
+                once: true
+            }
+        );
+
+    } else {
+
+        hideLoader();
+
+    }
+
+})();
 
 
 /* =========================================================
