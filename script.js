@@ -1787,3 +1787,1192 @@ console.log(
     "color:#d4af37;"
 
 );
+/* =========================================================
+   CROWN MUSIC ENGINE
+   ========================================================= */
+
+const tracks = [
+    {
+        title:
+            "STARS",
+
+        artist:
+            "Crown Music",
+
+        file:
+            "music/stars.mp3",
+
+        cover:
+            "music/stars-cover.png"
+    },
+
+
+    {
+        title:
+            "CROWNVERSE",
+
+        artist:
+            "Crown Music",
+
+        file:
+            "music/crownverse.mp3",
+
+        cover:
+            "music/crownverse-cover.png"
+    },
+
+
+    {
+        title:
+            "CHILL",
+
+        artist:
+            "Crown Music",
+
+        file:
+            "music/chill.mp3",
+
+        cover:
+            "music/chill-cover.png"
+    }
+];
+
+
+const musicPlayer =
+    document.querySelector(
+        ".music-player"
+    );
+
+
+if (musicPlayer) {
+
+    const playerCover =
+        document.querySelector(
+            ".player-cover"
+        );
+
+
+    const playerTitle =
+        document.querySelector(
+            ".player-title"
+        );
+
+
+    const playerArtist =
+        document.querySelector(
+            ".player-artist"
+        );
+
+
+    const playButton =
+        document.querySelector(
+            ".play-btn"
+        );
+
+
+    const previousButton =
+        document.querySelector(
+            ".previous-btn"
+        );
+
+
+    const nextButton =
+        document.querySelector(
+            ".next-btn"
+        );
+
+
+    const shuffleButton =
+        document.querySelector(
+            ".shuffle-btn"
+        );
+
+
+    const repeatButton =
+        document.querySelector(
+            ".repeat-btn"
+        );
+
+
+    const downloadButton =
+        document.querySelector(
+            ".download-btn"
+        );
+
+
+    const progressInput =
+        document.querySelector(
+            ".progress-bar"
+        );
+
+
+    const volumeInput =
+        document.querySelector(
+            ".volume-bar"
+        );
+
+
+    const currentTimeElement =
+        document.querySelector(
+            ".current-time"
+        );
+
+
+    const durationElement =
+        document.querySelector(
+            ".duration"
+        );
+
+
+    const musicCards =
+        document.querySelectorAll(
+            ".music-card"
+        );
+
+
+    let currentTrack =
+        0;
+
+
+    let isShuffle =
+        false;
+
+
+    let isRepeat =
+        false;
+
+
+    const audio =
+        new Audio();
+
+
+    audio.preload =
+        "metadata";
+
+
+    audio.volume =
+        0.8;
+
+
+    function formatTime(seconds) {
+
+        if (
+            !Number.isFinite(
+                seconds
+            )
+        ) {
+
+            return "0:00";
+
+        }
+
+
+        const minutes =
+            Math.floor(
+                seconds / 60
+            );
+
+
+        const remainingSeconds =
+            Math.floor(
+                seconds % 60
+            )
+                .toString()
+                .padStart(
+                    2,
+                    "0"
+                );
+
+
+        return `${minutes}:${remainingSeconds}`;
+
+    }
+
+
+    function loadTrack(
+        index,
+        autoplay = false
+    ) {
+
+        if (
+            index < 0
+        ) {
+
+            index =
+                tracks.length -
+                1;
+
+        }
+
+
+        if (
+            index >=
+            tracks.length
+        ) {
+
+            index =
+                0;
+
+        }
+
+
+        currentTrack =
+            index;
+
+
+        const track =
+            tracks[
+                currentTrack
+            ];
+
+
+        audio.src =
+            track.file;
+
+
+        audio.load();
+
+
+        if (playerCover) {
+
+            playerCover.src =
+                track.cover;
+
+
+            playerCover.alt =
+                `${track.title} cover`;
+
+        }
+
+
+        if (playerTitle) {
+
+            playerTitle.textContent =
+                track.title;
+
+        }
+
+
+        if (playerArtist) {
+
+            playerArtist.textContent =
+                track.artist;
+
+        }
+
+
+        if (currentTimeElement) {
+
+            currentTimeElement.textContent =
+                "0:00";
+
+        }
+
+
+        if (durationElement) {
+
+            durationElement.textContent =
+                "0:00";
+
+        }
+
+
+        if (progressInput) {
+
+            progressInput.value =
+                "0";
+
+        }
+
+
+        musicCards.forEach(
+            (card) => {
+
+                const trackNumber =
+                    Number(
+                        card.dataset.track
+                    );
+
+
+                card.classList.toggle(
+                    "active",
+                    trackNumber ===
+                    currentTrack
+                );
+
+
+                const button =
+                    card.querySelector(
+                        ".card-play"
+                    );
+
+
+                if (button) {
+
+                    button.textContent =
+                        "▶";
+
+                }
+
+            }
+        );
+
+
+        if (autoplay) {
+
+            playCurrentTrack();
+
+        }
+
+
+        updatePlayButton();
+
+    }
+
+
+    function updatePlayButton() {
+
+        if (playButton) {
+
+            if (audio.paused) {
+
+                playButton.textContent =
+                    "▶";
+
+
+                playButton.setAttribute(
+                    "aria-label",
+                    "Play"
+                );
+
+            }
+
+            else {
+
+                playButton.textContent =
+                    "Ⅱ";
+
+
+                playButton.setAttribute(
+                    "aria-label",
+                    "Pause"
+                );
+
+            }
+
+        }
+
+
+        musicCards.forEach(
+            (card) => {
+
+                const button =
+                    card.querySelector(
+                        ".card-play"
+                    );
+
+
+                if (!button) {
+
+                    return;
+
+                }
+
+
+                const trackNumber =
+                    Number(
+                        card.dataset.track
+                    );
+
+
+                if (
+                    trackNumber ===
+                    currentTrack &&
+
+                    !audio.paused
+                ) {
+
+                    button.textContent =
+                        "Ⅱ";
+
+                }
+
+                else {
+
+                    button.textContent =
+                        "▶";
+
+                }
+
+            }
+        );
+
+    }
+
+
+    function playCurrentTrack() {
+
+        audio.play()
+            .then(() => {
+
+                updatePlayButton();
+
+            })
+            .catch((error) => {
+
+                console.warn(
+                    "Unable to play Crown Music:",
+                    error
+                );
+
+            });
+
+    }
+
+
+    function pauseCurrentTrack() {
+
+        audio.pause();
+
+        updatePlayButton();
+
+    }
+
+
+    function togglePlay() {
+
+        if (
+            audio.paused
+        ) {
+
+            playCurrentTrack();
+
+        }
+
+        else {
+
+            pauseCurrentTrack();
+
+        }
+
+    }
+
+
+    function nextTrack() {
+
+        if (isShuffle) {
+
+            let nextIndex;
+
+
+            do {
+
+                nextIndex =
+                    Math.floor(
+                        Math.random() *
+                        tracks.length
+                    );
+
+            }
+
+            while (
+                tracks.length > 1 &&
+                nextIndex === currentTrack
+            );
+
+
+            loadTrack(
+                nextIndex,
+                true
+            );
+
+        }
+
+        else {
+
+            loadTrack(
+                currentTrack + 1,
+                true
+            );
+
+        }
+
+    }
+
+
+    function previousTrack() {
+
+        if (
+            audio.currentTime >
+            3
+        ) {
+
+            audio.currentTime =
+                0;
+
+            return;
+
+        }
+
+
+        loadTrack(
+            currentTrack - 1,
+            true
+        );
+
+    }
+
+
+    function updateProgress() {
+
+        if (
+            !progressInput
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            Number.isFinite(
+                audio.duration
+            ) &&
+            audio.duration > 0
+        ) {
+
+            progressInput.value =
+                (
+                    audio.currentTime /
+                    audio.duration
+                ) *
+                100;
+
+        }
+
+
+        if (currentTimeElement) {
+
+            currentTimeElement.textContent =
+                formatTime(
+                    audio.currentTime
+                );
+
+        }
+
+
+        if (durationElement) {
+
+            durationElement.textContent =
+                formatTime(
+                    audio.duration
+                );
+
+        }
+
+    }
+
+
+    function seekTrack() {
+
+        if (
+            !Number.isFinite(
+                audio.duration
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        const percentage =
+            Number(
+                progressInput.value
+            );
+
+
+        audio.currentTime =
+            (
+                percentage /
+                100
+            ) *
+            audio.duration;
+
+    }
+
+
+    function downloadCurrentTrack() {
+
+        const track =
+            tracks[
+                currentTrack
+            ];
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.href =
+            track.file;
+
+
+        link.download =
+            track.file
+                .split("/")
+                .pop();
+
+
+        document.body.appendChild(
+            link
+        );
+
+
+        link.click();
+
+
+        link.remove();
+
+    }
+
+
+    function toggleShuffle() {
+
+        isShuffle =
+            !isShuffle;
+
+
+        if (shuffleButton) {
+
+            shuffleButton.classList.toggle(
+                "active",
+                isShuffle
+            );
+
+        }
+
+    }
+
+
+    function toggleRepeat() {
+
+        isRepeat =
+            !isRepeat;
+
+
+        if (repeatButton) {
+
+            repeatButton.classList.toggle(
+                "active",
+                isRepeat
+            );
+
+        }
+
+    }
+
+
+    playButton?.addEventListener(
+        "click",
+        togglePlay
+    );
+
+
+    previousButton?.addEventListener(
+        "click",
+        previousTrack
+    );
+
+
+    nextButton?.addEventListener(
+        "click",
+        nextTrack
+    );
+
+
+    shuffleButton?.addEventListener(
+        "click",
+        toggleShuffle
+    );
+
+
+    repeatButton?.addEventListener(
+        "click",
+        toggleRepeat
+    );
+
+
+    downloadButton?.addEventListener(
+        "click",
+        downloadCurrentTrack
+    );
+
+
+    progressInput?.addEventListener(
+        "input",
+        seekTrack
+    );
+
+
+    volumeInput?.addEventListener(
+        "input",
+        () => {
+
+            audio.volume =
+                Number(
+                    volumeInput.value
+                );
+
+        }
+    );
+
+
+    audio.addEventListener(
+        "timeupdate",
+        updateProgress
+    );
+
+
+    audio.addEventListener(
+        "loadedmetadata",
+        updateProgress
+    );
+
+
+    audio.addEventListener(
+        "play",
+        updatePlayButton
+    );
+
+
+    audio.addEventListener(
+        "pause",
+        updatePlayButton
+    );
+
+
+    audio.addEventListener(
+        "ended",
+        () => {
+
+            if (isRepeat) {
+
+                audio.currentTime =
+                    0;
+
+                playCurrentTrack();
+
+            }
+
+            else {
+
+                nextTrack();
+
+            }
+
+        }
+    );
+
+
+    musicCards.forEach(
+        (card) => {
+
+            const cardButton =
+                card.querySelector(
+                    ".card-play"
+                );
+
+
+            if (!cardButton) {
+
+                return;
+
+            }
+
+
+            cardButton.addEventListener(
+                "click",
+                () => {
+
+                    const trackNumber =
+                        Number(
+                            card.dataset.track
+                        );
+
+
+                    if (
+                        trackNumber ===
+                        currentTrack
+                    ) {
+
+                        togglePlay();
+
+                    }
+
+                    else {
+
+                        loadTrack(
+                            trackNumber,
+                            true
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+    loadTrack(
+        0,
+        false
+    );
+
+}
+    if (downloadButton) {
+        downloadButton.addEventListener(
+            "click",
+            () => {
+
+                const track =
+                    tracks[
+                        currentTrack
+                    ];
+
+                const link =
+                    document.createElement(
+                        "a"
+                    );
+
+                link.href =
+                    track.file;
+
+                link.download =
+                    `${track.title}.mp3`;
+
+                document.body.appendChild(
+                    link
+                );
+
+                link.click();
+
+                link.remove();
+
+            }
+        );
+    }
+
+
+    if (progressInput) {
+        progressInput.addEventListener(
+            "input",
+            () => {
+
+                if (
+                    !audio.duration
+                ) {
+                    return;
+                }
+
+                const percentage =
+                    Number(
+                        progressInput.value
+                    );
+
+                audio.currentTime =
+                    (
+                        percentage /
+                        100
+                    ) *
+                    audio.duration;
+
+            }
+        );
+    }
+
+
+    if (volumeInput) {
+        volumeInput.addEventListener(
+            "input",
+            () => {
+
+                audio.volume =
+                    Number(
+                        volumeInput.value
+                    );
+
+            }
+        );
+    }
+
+
+    audio.addEventListener(
+        "loadedmetadata",
+        () => {
+
+            if (durationElement) {
+
+                durationElement.textContent =
+                    formatTime(
+                        audio.duration
+                    );
+
+            }
+
+        }
+    );
+
+
+    audio.addEventListener(
+        "timeupdate",
+        () => {
+
+            if (
+                !audio.duration
+            ) {
+                return;
+            }
+
+            const percentage =
+                (
+                    audio.currentTime /
+                    audio.duration
+                ) *
+                100;
+
+            if (progressInput) {
+
+                progressInput.value =
+                    percentage;
+
+            }
+
+            if (currentTimeElement) {
+
+                currentTimeElement.textContent =
+                    formatTime(
+                        audio.currentTime
+                    );
+
+            }
+
+        }
+    );
+
+
+    audio.addEventListener(
+        "play",
+        updatePlayButton
+    );
+
+
+    audio.addEventListener(
+        "pause",
+        updatePlayButton
+    );
+
+
+    audio.addEventListener(
+        "ended",
+        () => {
+
+            if (isRepeat) {
+
+                audio.currentTime =
+                    0;
+
+                playCurrentTrack();
+
+            }
+
+            else {
+
+                nextTrack();
+
+            }
+
+        }
+    );
+
+
+    musicCards.forEach(
+        (card) => {
+
+            card.addEventListener(
+                "click",
+                (event) => {
+
+                    const clickedButton =
+                        event.target.closest(
+                            ".card-play"
+                        );
+
+                    const index =
+                        Number(
+                            card.dataset.track
+                        );
+
+
+                    if (
+                        index ===
+                        currentTrack &&
+
+                        clickedButton &&
+
+                        !audio.paused
+                    ) {
+
+                        pauseCurrentTrack();
+
+                        return;
+
+                    }
+
+
+                    loadTrack(
+                        index,
+                        true
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        (event) => {
+
+            const tag =
+                document.activeElement
+                    ?.tagName;
+
+
+            if (
+                tag === "INPUT" ||
+                tag === "TEXTAREA"
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                event.code ===
+                "Space"
+            ) {
+
+                event.preventDefault();
+
+                togglePlay();
+
+            }
+
+
+            if (
+                event.code ===
+                "ArrowRight"
+            ) {
+
+                if (
+                    audio.duration
+                ) {
+
+                    audio.currentTime =
+                        Math.min(
+                            audio.duration,
+                            audio.currentTime +
+                            5
+                        );
+
+                }
+
+            }
+
+
+            if (
+                event.code ===
+                "ArrowLeft"
+            ) {
+
+                audio.currentTime =
+                    Math.max(
+                        0,
+                        audio.currentTime -
+                        5
+                    );
+
+            }
+
+        }
+    );
+
+
+    loadTrack(
+        0,
+        false
+    );
+
+}
+
+
+/* =========================================================
+   AUTOMATIC YEAR
+   ========================================================= */
+
+document
+    .querySelectorAll(
+        "[data-year]"
+    )
+    .forEach(
+        (element) => {
+
+            element.textContent =
+                new Date()
+                    .getFullYear();
+
+        }
+    );
+
+
+/* =========================================================
+   CONSOLE BRANDING
+   ========================================================= */
+
+console.log(
+    "%c👑 CROWNLABS",
+    "font-size:24px;" +
+    "font-weight:900;" +
+    "color:#d4af37;"
+);
+
+
+console.log(
+    "%cTechnology Beyond Limits.",
+    "font-size:14px;" +
+    "color:#999;"
+);
+
+
+console.log(
+    "%c🤖 CROWN A.I CONNECTED",
+    "font-size:14px;" +
+    "font-weight:900;" +
+    "color:#d4af37;"
+);
+
+
+console.log(
+    "%c🎵 CROWN MUSIC ENGINE ONLINE",
+    "font-size:14px;" +
+    "font-weight:900;" +
+    "color:#d4af37;"
+);
