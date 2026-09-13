@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -13,7 +14,7 @@
 
     <meta
         name="description"
-        content="CrownLabs is the official technology hub for Crown software, games, AI, music, tools and the Crownverse."
+        content="CrownLabs is the official Crown technology ecosystem for software, artificial intelligence, games, music, tools and Crownverse."
     >
 
     <meta
@@ -48,7 +49,7 @@
 
     <meta
         property="og:description"
-        content="Explore the Crown technology ecosystem."
+        content="Explore the official Crown technology ecosystem."
     >
 
     <meta
@@ -66,87 +67,121 @@
         rel="stylesheet"
         href="style.css"
     >
+
 </head>
 
 
 <body>
 
-    <!-- =========================
-         PAGE LOADER
-         ========================= -->
 
-    <div id="loader">
+    <!-- =====================================================
+         LOADER
+         ===================================================== -->
 
-        <div class="loader-crown">
-            <img
-                src="crown.ico"
-                alt="CrownLabs"
-            >
-        </div>
+    <div
+        id="loader"
+        aria-hidden="true"
+    >
 
-        <div class="loader-name">
-            CROWNLABS
-        </div>
+        <div class="loader-panel">
 
-        <div class="loader-line">
-            <span></span>
-        </div>
+            <div class="loader-crown">
 
-        <div class="loader-status">
-            INITIALIZING CROWN SYSTEM
+                <img
+                    src="crown-logo.png"
+                    alt="CrownLabs"
+                >
+
+            </div>
+
+            <div class="loader-brand">
+                CROWNLABS
+            </div>
+
+            <div class="loader-subtitle">
+                TECHNOLOGY BEYOND LIMITS
+            </div>
+
+            <div class="loader-progress">
+
+                <span></span>
+
+            </div>
+
+            <div class="loader-status">
+                INITIALIZING CROWN SYSTEM
+            </div>
+
         </div>
 
     </div>
 
 
-    <!-- =========================
-         BACKGROUND
-         ========================= -->
+    <!-- =====================================================
+         BACKGROUND SYSTEM
+         ===================================================== -->
 
     <div class="grid-background"></div>
 
     <div class="ambient ambient-one"></div>
+
     <div class="ambient ambient-two"></div>
+
+    <div class="ambient ambient-three"></div>
 
     <div class="cursor-glow"></div>
 
     <div class="scroll-progress"></div>
 
 
-    <!-- =========================
+    <!-- =====================================================
          HEADER
-         ========================= -->
+         ===================================================== -->
 
     <header class="site-header">
 
         <div class="nav-container">
 
+
             <a
                 href="#home"
                 class="brand"
+                aria-label="CrownLabs home"
             >
 
-                <img
-                    src="crown.ico"
-                    alt="CrownLabs logo"
-                >
+                <div class="brand-mark">
 
-                <div>
+                    <img
+                        src="crown-logo.png"
+                        alt="Crown"
+                    >
+
+                </div>
+
+                <div class="brand-copy">
+
                     <strong>
                         CROWN<span>LABS</span>
                     </strong>
 
                     <small>
-                        TECHNOLOGY ECOSYSTEM
+                        TECHNOLOGY BEYOND LIMITS
                     </small>
+
                 </div>
 
             </a>
 
 
-            <nav class="navigation">
+            <nav
+                class="navigation"
+                aria-label="Main navigation"
+            >
 
-                <a href="#home">
+                <a
+                    href="#home"
+                    class="active"
+                >
                     HOME
                 </a>
 
@@ -175,21 +210,26 @@
 
             <a
                 href="#projects"
-                class="nav-button"
+                class="header-button"
             >
                 EXPLORE
+                <span>→</span>
             </a>
 
 
             <button
                 class="mobile-menu"
+                type="button"
                 aria-label="Open navigation"
                 aria-expanded="false"
             >
+
                 <span></span>
                 <span></span>
                 <span></span>
+
             </button>
+
 
         </div>
 
@@ -199,9 +239,9 @@
     <main>
 
 
-        <!-- =========================
+        <!-- =================================================
              HERO
-             ========================= -->
+             ================================================= -->
 
         <section
             class="hero"
@@ -210,29 +250,45 @@
 
             <div class="hero-grid">
 
+
                 <div class="hero-content reveal">
 
+
                     <div class="system-status">
+
                         <span class="status-dot"></span>
-                        CROWNLABS SYSTEM ONLINE
+
+                        CROWN SYSTEM ONLINE
+
                     </div>
 
-                    <p class="eyebrow">
-                        THE OFFICIAL CROWN TECHNOLOGY ECOSYSTEM
+
+                    <p class="hero-eyebrow">
+                        CROWN TECHNOLOGY ECOSYSTEM
                     </p>
+
 
                     <h1>
+
                         BUILDING
+
                         <span>
-                            THE FUTURE.
+                            BEYOND
                         </span>
+
+                        LIMITS.
+
                     </h1>
 
+
                     <p class="hero-description">
-                        CrownLabs is an independent technology ecosystem
-                        creating software, games, artificial intelligence,
-                        music, developer tools and digital worlds.
+
+                        CrownLabs is the central technology ecosystem
+                        for Crown software, artificial intelligence,
+                        games, music, tools and future digital worlds.
+
                     </p>
+
 
                     <div class="hero-actions">
 
@@ -240,15 +296,23 @@
                             href="#projects"
                             class="button button-gold"
                         >
-                            EXPLORE PROJECTS
+
+                            EXPLORE CROWN
+
                             <span>→</span>
+
                         </a>
+
 
                         <a
                             href="#ai"
                             class="button button-outline"
                         >
+
                             DISCOVER CROWN A.I
+
+                            <span>↗</span>
+
                         </a>
 
                     </div>
@@ -256,53 +320,106 @@
 
                     <div class="hero-metrics">
 
-                        <div>
-                            <strong>01</strong>
-                            <span>ECOSYSTEM</span>
-                        </div>
 
                         <div>
-                            <strong>∞</strong>
-                            <span>POSSIBILITIES</span>
+
+                            <strong>
+                                2026
+                            </strong>
+
+                            <span>
+                                ESTABLISHED
+                            </span>
+
                         </div>
 
+
                         <div>
-                            <strong>2026</strong>
-                            <span>BUILDING NOW</span>
+
+                            <strong>
+                                05+
+                            </strong>
+
+                            <span>
+                                SYSTEMS
+                            </span>
+
                         </div>
+
+
+                        <div>
+
+                            <strong>
+                                CWN
+                            </strong>
+
+                            <span>
+                                ECOSYSTEM
+                            </span>
+
+                        </div>
+
 
                     </div>
+
 
                 </div>
 
 
-                <div class="hero-visual reveal">
+                <!-- HERO VISUAL -->
+
+                <div
+                    class="hero-visual reveal"
+                    aria-hidden="true"
+                >
+
 
                     <div class="orbit orbit-one"></div>
+
                     <div class="orbit orbit-two"></div>
+
                     <div class="orbit orbit-three"></div>
 
+
                     <div class="orbit-dot dot-one"></div>
+
                     <div class="orbit-dot dot-two"></div>
+
                     <div class="orbit-dot dot-three"></div>
 
-                    <div class="hero-logo">
 
-                        <div class="logo-ring"></div>
+                    <div class="hero-core">
+
+                        <div class="hero-core-ring"></div>
+
+                        <div class="hero-core-ring ring-two"></div>
 
                         <img
                             src="crown-logo.png"
-                            alt="CrownLabs"
+                            alt=""
                         >
 
                     </div>
 
+
                     <div class="visual-label">
-                        <span>CROWN</span>
+
+                        <span>
+                            CROWN
+                        </span>
+
                         CORE SYSTEM
+
                     </div>
 
+
+                    <div class="visual-coordinate">
+                        06.2026 / CROWN-LAB
+                    </div>
+
+
                 </div>
+
 
             </div>
 
@@ -322,16 +439,18 @@
         </section>
 
 
-        <!-- =========================
+        <!-- =================================================
              PROJECTS
-             ========================= -->
+             ================================================= -->
 
         <section
             class="section projects-section"
             id="projects"
         >
 
+
             <div class="section-heading reveal">
+
 
                 <div>
 
@@ -346,10 +465,14 @@
 
                 </div>
 
+
                 <p class="section-intro">
-                    Software, games and technology projects
-                    created inside the Crown ecosystem.
+
+                    Software, applications and technology
+                    projects created inside the Crown ecosystem.
+
                 </p>
+
 
             </div>
 
@@ -358,24 +481,39 @@
 
             <article class="featured-project reveal">
 
+
                 <div class="project-visual">
+
 
                     <div class="project-number">
                         PROJECT / 001
                     </div>
 
+
                     <div class="project-lines"></div>
+
+
+                    <div class="project-grid-glow"></div>
+
 
                     <div class="project-symbol">
                         TA
                     </div>
 
-                    <div class="project-glow"></div>
+
+                    <div class="project-orbit"></div>
+
+
+                    <div class="project-corner">
+                        CROWN SOFTWARE
+                    </div>
+
 
                 </div>
 
 
                 <div class="project-information">
+
 
                     <div class="project-top">
 
@@ -391,21 +529,30 @@
 
 
                     <h3>
+
                         Tech Analyst
-                        <span>Challenge</span>
+
+                        <span>
+                            Challenge
+                        </span>
+
                     </h3>
 
 
                     <p>
+
                         A Windows technical analysis and
                         assessment application created as
                         part of the CrownLabs software ecosystem.
+
                     </p>
 
 
                     <div class="project-specs">
 
+
                         <div>
+
                             <small>
                                 PLATFORM
                             </small>
@@ -413,9 +560,12 @@
                             <strong>
                                 WINDOWS x64
                             </strong>
+
                         </div>
 
+
                         <div>
+
                             <small>
                                 VERSION
                             </small>
@@ -423,9 +573,12 @@
                             <strong>
                                 2.0.0
                             </strong>
+
                         </div>
 
+
                         <div>
+
                             <small>
                                 STATUS
                             </small>
@@ -433,18 +586,48 @@
                             <strong class="released">
                                 RELEASED
                             </strong>
+
                         </div>
+
 
                     </div>
 
 
-                    <a
-                        class="download-button"
-                        href="https://github.com/adedejiabdulmateen15-cmd/Crown-Website/releases/download/v2.0.0/Tech.Analyst.Challenge.Setup.2.0.0.exe"
-                    >
-                        DOWNLOAD FOR WINDOWS
-                        <span>↓</span>
-                    </a>
+                    <div class="project-actions">
+
+
+                        <a
+                            class="download-button"
+                            href="https://github.com/adedejiabdulmateen15-cmd/Crown-Website/releases/download/v2.0.0/Tech.Analyst.Challenge.Setup.2.0.0.exe"
+                        >
+
+                            DOWNLOAD FOR WINDOWS
+
+                            <span>
+                                ↓
+                            </span>
+
+                        </a>
+
+
+                        <a
+                            class="project-link"
+                            href="https://github.com/adedejiabdulmateen15-cmd/Crown-Website"
+                            target="_blank"
+                            rel="noopener"
+                        >
+
+                            REPOSITORY
+
+                            <span>
+                                ↗
+                            </span>
+
+                        </a>
+
+
+                    </div>
+
 
                 </div>
 
@@ -453,28 +636,44 @@
 
             <!-- CROWN A.I -->
 
-            <article
-                class="featured-project reveal crown-ai-project"
-            >
+            <article class="featured-project ai-project reveal">
 
-                <div class="project-visual">
+
+                <div class="project-visual ai-project-visual">
+
 
                     <div class="project-number">
                         PROJECT / 002
                     </div>
 
+
                     <div class="project-lines"></div>
 
-                    <div class="project-symbol">
-                        AI
+
+                    <div class="ai-project-core">
+
+                        <span>
+                            AI
+                        </span>
+
                     </div>
 
-                    <div class="project-glow"></div>
+
+                    <div class="ai-project-orbit orbit-a"></div>
+
+                    <div class="ai-project-orbit orbit-b"></div>
+
+
+                    <div class="project-corner">
+                        CROWN INTELLIGENCE
+                    </div>
+
 
                 </div>
 
 
                 <div class="project-information">
+
 
                     <div class="project-top">
 
@@ -490,23 +689,31 @@
 
 
                     <h3>
+
                         Crown
-                        <span>A.I</span>
+
+                        <span>
+                            A.I
+                        </span>
+
                     </h3>
 
 
                     <p>
-                        Crown's official intelligence platform,
-                        combining Gemini cloud intelligence with
-                        a local LM Studio engine, Crown Knowledge,
-                        Crown Admin and owner-authorized Crown
-                        Device Control.
+
+                        The official Crown intelligence platform,
+                        combining cloud intelligence, local AI,
+                        Crown Knowledge, administration and
+                        owner-authorized desktop systems.
+
                     </p>
 
 
                     <div class="project-specs">
 
+
                         <div>
+
                             <small>
                                 PLATFORM
                             </small>
@@ -514,53 +721,74 @@
                             <strong>
                                 WINDOWS x64
                             </strong>
+
                         </div>
 
+
                         <div>
+
                             <small>
-                                VERSION
+                                ENGINE
                             </small>
 
                             <strong>
-                                5.3.2
+                                GEMINI + LOCAL AI
                             </strong>
+
                         </div>
 
+
                         <div>
+
                             <small>
                                 STATUS
                             </small>
 
                             <strong class="released">
-                                RELEASED
+                                AVAILABLE
                             </strong>
+
                         </div>
+
 
                     </div>
 
 
                     <div class="project-actions">
 
+
                         <a
                             class="download-button"
                             href="https://github.com/adedejiabdulmateen15-cmd/Crown-AI/releases/download/v5.3.2/Crown.A.I.Setup.5.3.2.exe"
                         >
-                            DOWNLOAD FOR WINDOWS
-                            <span>↓</span>
+
+                            DOWNLOAD CROWN A.I
+
+                            <span>
+                                ↓
+                            </span>
+
                         </a>
 
 
                         <a
-                            class="nav-button"
+                            class="project-link"
                             href="https://github.com/adedejiabdulmateen15-cmd/Crown-AI"
                             target="_blank"
-                            rel="noopener noreferrer"
+                            rel="noopener"
                         >
+
                             VIEW REPOSITORY
-                            <span>↗</span>
+
+                            <span>
+                                ↗
+                            </span>
+
                         </a>
 
+
                     </div>
+
 
                 </div>
 
@@ -571,9 +799,11 @@
 
             <div class="upcoming reveal">
 
+
                 <div class="upcoming-icon">
                     +
                 </div>
+
 
                 <div>
 
@@ -582,37 +812,46 @@
                     </span>
 
                     <h3>
+
                         THE ECOSYSTEM IS
+
                         <strong>
                             EXPANDING.
                         </strong>
+
                     </h3>
 
                     <p>
+
                         New Crown applications, games,
                         tools and experiments are currently
                         being developed.
+
                     </p>
 
                 </div>
+
 
                 <div class="upcoming-status">
                     IN DEVELOPMENT
                 </div>
 
+
             </div>
+
 
         </section>
 
 
-        <!-- =========================
+        <!-- =================================================
              CROWN A.I
-             ========================= -->
+             ================================================= -->
 
         <section
             class="ai-section"
             id="ai"
         >
+
 
             <div class="ai-background-word">
                 CROWN A.I
@@ -620,6 +859,7 @@
 
 
             <div class="ai-content reveal">
+
 
                 <div class="ai-badge">
 
@@ -636,23 +876,29 @@
 
 
                 <h2>
-                    INTELLIGENCE
+
+                    MEET
+
                     <span>
-                        BEYOND LIMITS.
+                        CROWN A.I
                     </span>
+
                 </h2>
 
 
                 <p class="ai-description">
+
                     Crown A.I is the official Crown intelligence
                     platform, built as part of CrownLabs to bring
                     cloud intelligence, local AI, Crown Knowledge
                     and Crown desktop systems together in one
                     professional workspace.
+
                 </p>
 
 
                 <div class="ai-status-panel">
+
 
                     <div class="ai-status-main">
 
@@ -671,6 +917,7 @@
 
 
                     <div class="ai-status-grid">
+
 
                         <div class="ai-status-card">
 
@@ -710,25 +957,67 @@
 
                         </div>
 
+
                     </div>
+
 
                 </div>
 
+
+                <div class="ai-actions-row">
+
+
+                    <a
+                        href="https://github.com/adedejiabdulmateen15-cmd/Crown-AI/releases/download/v5.3.2/Crown.A.I.Setup.5.3.2.exe"
+                        class="button button-gold"
+                    >
+
+                        DOWNLOAD CROWN A.I
+
+                        <span>
+                            ↓
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="https://github.com/adedejiabdulmateen15-cmd/Crown-AI"
+                        class="button button-outline"
+                        target="_blank"
+                        rel="noopener"
+                    >
+
+                        VIEW SOURCE
+
+                        <span>
+                            ↗
+                        </span>
+
+                    </a>
+
+
+                </div>
+
+
             </div>
+
 
         </section>
 
 
-        <!-- =========================
+        <!-- =================================================
              CROWN MUSIC
-             ========================= -->
+             ================================================= -->
 
         <section
-            class="section music-section"
+            class="music-section"
             id="music"
         >
 
+
             <div class="section-heading reveal">
+
 
                 <div>
 
@@ -743,23 +1032,30 @@
 
                 </div>
 
+
                 <p class="section-intro">
-                    Original Crown music and sound experiences.
+
+                    Music created inside the Crown ecosystem,
+                    designed for different moments and worlds.
+
                 </p>
+
 
             </div>
 
 
             <div class="music-player reveal">
 
+
                 <div class="music-main">
+
 
                     <div class="music-cover">
 
                         <img
-                            id="musicCover"
+                            class="player-cover"
                             src="music/stars-cover.png"
-                            alt="Crown Music"
+                            alt="Current track"
                         >
 
                     </div>
@@ -771,76 +1067,103 @@
                             NOW PLAYING
                         </span>
 
-                        <h3 id="musicTitle">
+                        <h3 class="player-title">
                             STARS
                         </h3>
 
-                        <p id="musicArtist">
+                        <p class="player-artist">
                             CROWN MUSIC
                         </p>
 
                     </div>
+
 
                 </div>
 
 
                 <div class="music-controls">
 
-                    <button
-                        id="previousButton"
-                        aria-label="Previous track"
-                    >
-                        ◀
-                    </button>
 
                     <button
-                        id="playButton"
+                        class="previous-btn"
+                        type="button"
+                        aria-label="Previous track"
+                    >
+                        ‹
+                    </button>
+
+
+                    <button
+                        class="play-btn"
+                        type="button"
                         aria-label="Play"
                     >
                         ▶
                     </button>
 
-                    <button
-                        id="nextButton"
-                        aria-label="Next track"
-                    >
-                        ▶
-                    </button>
 
                     <button
-                        id="shuffleButton"
+                        class="next-btn"
+                        type="button"
+                        aria-label="Next track"
+                    >
+                        ›
+                    </button>
+
+
+                    <button
+                        class="shuffle-btn"
+                        type="button"
                         aria-label="Shuffle"
                     >
                         ⤨
                     </button>
 
+
                     <button
-                        id="repeatButton"
+                        class="repeat-btn"
+                        type="button"
                         aria-label="Repeat"
                     >
                         ↻
                     </button>
+
+
+                    <button
+                        class="download-btn"
+                        type="button"
+                        aria-label="Download track"
+                    >
+                        ↓
+                    </button>
+
 
                 </div>
 
 
                 <div class="music-progress">
 
-                    <span id="currentTime">
+
+                    <span class="current-time">
                         0:00
                     </span>
 
+
                     <input
-                        id="progressInput"
+                        class="progress-bar"
                         type="range"
                         min="0"
                         max="100"
                         value="0"
+                        step="0.1"
+                        aria-label="Track progress"
                     >
 
-                    <span id="duration">
+
+                    <span class="duration">
                         0:00
                     </span>
+
 
                 </div>
 
@@ -848,37 +1171,27 @@
                 <div class="music-volume">
 
                     <span>
-                        VOL
+                        VOLUME
                     </span>
 
                     <input
-                        id="volumeInput"
+                        class="volume-bar"
                         type="range"
                         min="0"
                         max="1"
-                        step="0.01"
-                        value="1"
+                        value=".8"
+                        step=".01"
+                        aria-label="Volume"
                     >
-
-                    <button
-                        id="downloadButton"
-                        aria-label="Download track"
-                    >
-                        ↓
-                    </button>
 
                 </div>
 
-
-                <audio
-                    id="musicAudio"
-                    preload="metadata"
-                ></audio>
 
             </div>
 
 
             <div class="music-cards reveal">
+
 
                 <article
                     class="music-card"
@@ -897,7 +1210,7 @@
                     <div class="music-card-information">
 
                         <span>
-                            CROWN MUSIC
+                            CROWN MUSIC / 001
                         </span>
 
                         <h3>
@@ -908,6 +1221,7 @@
 
                     <button
                         class="card-play"
+                        type="button"
                         aria-label="Play Stars"
                     >
                         ▶
@@ -933,7 +1247,7 @@
                     <div class="music-card-information">
 
                         <span>
-                            CROWN MUSIC
+                            CROWN MUSIC / 002
                         </span>
 
                         <h3>
@@ -944,6 +1258,7 @@
 
                     <button
                         class="card-play"
+                        type="button"
                         aria-label="Play Crownverse"
                     >
                         ▶
@@ -969,7 +1284,7 @@
                     <div class="music-card-information">
 
                         <span>
-                            CROWN MUSIC
+                            CROWN MUSIC / 003
                         </span>
 
                         <h3>
@@ -980,6 +1295,7 @@
 
                     <button
                         class="card-play"
+                        type="button"
                         aria-label="Play Chill"
                     >
                         ▶
@@ -987,19 +1303,22 @@
 
                 </article>
 
+
             </div>
+
 
         </section>
 
 
-        <!-- =========================
+        <!-- =================================================
              VISION
-             ========================= -->
+             ================================================= -->
 
         <section
-            class="section vision-section"
+            class="vision-section"
             id="vision"
         >
+
 
             <div class="section-heading reveal">
 
@@ -1011,31 +1330,41 @@
 
                     <h2>
                         ONE ECOSYSTEM.
-                        <span>
-                            MANY WORLDS.
-                        </span>
+                        <span>INFINITE.</span>
                     </h2>
 
                 </div>
+
+                <p class="section-intro">
+
+                    CrownLabs connects every Crown project
+                    through one growing digital ecosystem.
+
+                </p>
 
             </div>
 
 
             <div class="vision-grid reveal">
 
+
                 <article class="vision-card">
 
-                    <span>
+                    <span class="vision-number">
                         01
                     </span>
 
+                    <div class="vision-icon">
+                        ◇
+                    </div>
+
                     <h3>
-                        SOFTWARE
+                        TECHNOLOGY
                     </h3>
 
                     <p>
-                        Professional desktop applications,
-                        utilities and technology systems.
+                        Applications, systems and tools
+                        designed to solve real problems.
                     </p>
 
                 </article>
@@ -1043,17 +1372,21 @@
 
                 <article class="vision-card">
 
-                    <span>
+                    <span class="vision-number">
                         02
                     </span>
+
+                    <div class="vision-icon">
+                        ◈
+                    </div>
 
                     <h3>
                         INTELLIGENCE
                     </h3>
 
                     <p>
-                        Crown A.I and intelligent systems
-                        connecting cloud and local technology.
+                        Crown A.I and future intelligence
+                        systems connecting cloud and local AI.
                     </p>
 
                 </article>
@@ -1061,17 +1394,21 @@
 
                 <article class="vision-card">
 
-                    <span>
+                    <span class="vision-number">
                         03
                     </span>
 
+                    <div class="vision-icon">
+                        ◎
+                    </div>
+
                     <h3>
-                        GAMES
+                        CREATIVE
                     </h3>
 
                     <p>
-                        Original worlds, gameplay systems
-                        and experiences created by Crown.
+                        Music, visual systems and creative
+                        experiments built under Crown.
                     </p>
 
                 </article>
@@ -1079,216 +1416,326 @@
 
                 <article class="vision-card">
 
-                    <span>
+                    <span class="vision-number">
                         04
                     </span>
 
+                    <div class="vision-icon">
+                        ✦
+                    </div>
+
                     <h3>
-                        CWN
+                        CROWNVERSE
                     </h3>
 
                     <p>
-                        Crown's technology ecosystem format
-                        connecting projects across the platform.
+                        A growing digital universe connecting
+                        stories, games and Crownborn.
                     </p>
 
                 </article>
 
+
             </div>
+
 
         </section>
 
 
-        <!-- =========================
+        <!-- =================================================
              CROWNVERSE
-             ========================= -->
+             ================================================= -->
 
         <section
             class="crownverse-section"
             id="crownverse"
         >
 
-            <div class="crownverse-bg"></div>
 
             <div class="crownverse-content reveal">
+
 
                 <p class="section-label">
                     05 / CROWNVERSE
                 </p>
 
+
                 <h2>
+
                     ENTER THE
+
                     <span>
                         CROWNVERSE.
                     </span>
+
                 </h2>
 
-                <p>
-                    A growing universe of original games,
-                    characters, worlds and Crown technology.
+
+                <p class="crownverse-description">
+
+                    A growing digital universe created by
+                    CrownLabs — connecting games, stories,
+                    characters, technology and future
+                    Crown projects.
+
                 </p>
 
-                <a
-                    href="#about"
-                    class="button button-gold"
-                >
-                    EXPLORE THE VISION
-                    <span>→</span>
-                </a>
+
+                <div class="crownverse-card">
+
+
+                    <div class="crownverse-logo">
+
+                        <div class="crownverse-ring"></div>
+
+                        <img
+                            src="crown-logo.png"
+                            alt="Crownverse"
+                        >
+
+                    </div>
+
+
+                    <div class="crownverse-info">
+
+                        <span>
+                            A UNIVERSE IN DEVELOPMENT
+                        </span>
+
+
+                        <h3>
+
+                            WHERE THE
+
+                            <strong>
+                                CROWN
+                            </strong>
+
+                            LIVES.
+
+                        </h3>
+
+
+                        <p>
+
+                            At the center of the Crownverse
+                            are the Crownborn — mysterious
+                            beings connected to the power
+                            of the Crown.
+
+                        </p>
+
+
+                        <a
+                            href="#about"
+                            class="button button-outline"
+                        >
+
+                            EXPLORE THE VISION
+
+                            <span>
+                                →
+                            </span>
+
+                        </a>
+
+                    </div>
+
+
+                </div>
+
 
             </div>
+
 
         </section>
 
 
-        <!-- =========================
+        <!-- =================================================
              ABOUT
-             ========================= -->
+             ================================================= -->
 
         <section
             class="section about-section"
             id="about"
         >
 
-            <div class="section-heading reveal">
-
-                <div>
-
-                    <p class="section-label">
-                        06 / ABOUT
-                    </p>
-
-                    <h2>
-                        THIS IS
-                        <span>
-                            CROWN.
-                        </span>
-                    </h2>
-
-                </div>
-
-                <p class="section-intro">
-                    CrownLabs is built around one idea:
-                    technology should go beyond limits.
-                </p>
-
-            </div>
-
 
             <div class="about-grid reveal">
 
-                <div class="about-main">
 
-                    <p>
-                        Crown is an independent technology
-                        ecosystem focused on building software,
-                        artificial intelligence, games, music,
-                        tools and digital experiences.
-                    </p>
+                <div class="about-logo">
 
-                    <p>
-                        Every Crown project is part of the
-                        larger ecosystem — connected by a
-                        consistent identity, technology and vision.
-                    </p>
+                    <div class="about-logo-frame">
 
-                </div>
+                        <img
+                            src="crown-logo.png"
+                            alt="CrownLabs"
+                        >
 
-
-                <div class="about-side">
-
-                    <div>
-                        <small>
-                            CREATOR
-                        </small>
-
-                        <strong>
-                            CROWN
-                        </strong>
-                    </div>
-
-
-                    <div>
-                        <small>
-                            ECOSYSTEM
-                        </small>
-
-                        <strong>
-                            CROWNLABS
-                        </strong>
-                    </div>
-
-
-                    <div>
-                        <small>
-                            YEAR
-                        </small>
-
-                        <strong>
-                            <span data-year>
-                                2026
-                            </span>
-                        </strong>
                     </div>
 
                 </div>
+
+
+                <div class="about-content">
+
+
+                    <p class="section-label">
+                        06 / ABOUT CROWNLABS
+                    </p>
+
+
+                    <h2>
+
+                        THIS IS
+
+                        <span>
+                            ONLY THE BEGINNING.
+                        </span>
+
+                    </h2>
+
+
+                    <p>
+
+                        CrownLabs is the central home for
+                        Crown technology, software, games,
+                        artificial intelligence, creative
+                        experiments and future projects.
+
+                    </p>
+
+
+                    <div class="about-line"></div>
+
+
+                    <div class="about-meta">
+
+
+                        <span>
+
+                            <strong>
+                                01
+                            </strong>
+
+                            TECHNOLOGY
+
+                        </span>
+
+
+                        <span>
+
+                            <strong>
+                                02
+                            </strong>
+
+                            CREATIVITY
+
+                        </span>
+
+
+                        <span>
+
+                            <strong>
+                                03
+                            </strong>
+
+                            INNOVATION
+
+                        </span>
+
+
+                    </div>
+
+
+                </div>
+
 
             </div>
+
 
         </section>
 
 
-        <!-- =========================
+        <!-- =================================================
              FINAL CTA
-             ========================= -->
+             ================================================= -->
 
-        <section class="final-cta">
+        <section class="final-section">
 
-            <div class="final-cta-inner reveal">
 
-                <p class="section-label">
-                    CROWNLABS
-                </p>
+            <div class="final-grid">
 
-                <h2>
-                    TECHNOLOGY
-                    <span>
-                        BEYOND LIMITS.
-                    </span>
-                </h2>
 
-                <p>
-                    The Crown ecosystem is only getting started.
-                </p>
+                <div class="final-mark">
+                    C
+                </div>
+
+
+                <div class="final-content">
+
+                    <p class="section-label">
+                        CROWNLABS
+                    </p>
+
+                    <h2>
+
+                        TECHNOLOGY
+
+                        <span>
+                            BEYOND LIMITS.
+                        </span>
+
+                    </h2>
+
+                    <p>
+
+                        The Crown ecosystem is only getting started.
+
+                    </p>
+
+                </div>
+
 
                 <a
-                    href="#projects"
-                    class="button button-gold"
+                    href="#home"
+                    class="final-button"
                 >
-                    EXPLORE CROWN
-                    <span>→</span>
+
+                    BACK TO TOP
+
+                    <span>
+                        ↑
+                    </span>
+
                 </a>
+
 
             </div>
 
+
         </section>
+
 
     </main>
 
 
-    <!-- =========================
+    <!-- =====================================================
          FOOTER
-         ========================= -->
+         ===================================================== -->
 
     <footer class="site-footer">
 
+
         <div class="footer-inner">
+
 
             <div class="footer-brand">
 
                 <img
-                    src="crown.ico"
-                    alt="Crown"
+                    src="crown-logo.png"
+                    alt="CrownLabs"
                 >
 
                 <div>
@@ -1298,7 +1745,7 @@
                     </strong>
 
                     <small>
-                        TECHNOLOGY BEYOND LIMITS.
+                        TECHNOLOGY BEYOND LIMITS
                     </small>
 
                 </div>
@@ -1333,15 +1780,14 @@
 
             <div class="footer-copy">
 
-                ©
-                <span data-year>
-                    2026
-                </span>
-                CROWN. ALL RIGHTS RESERVED.
+                © <span data-year>2026</span>
+                CROWN
 
             </div>
 
+
         </div>
+
 
     </footer>
 
